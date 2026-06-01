@@ -1,6 +1,5 @@
 # VStudy - Virtual Study Group Platform
 
-![VStudy Logo](public/vstudygroup.png)
 
 A comprehensive, full-stack web application that enables virtual study groups to collaborate in real-time. VStudy provides a modern, feature-rich environment for students and educators to share resources, conduct live sessions, and work together seamlessly across multiple features and devices.
 
