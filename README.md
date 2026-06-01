@@ -911,8 +911,17 @@ test('renders login form', () => {
 2. Import project in Vercel
 3. Set build command: `npm run build`
 4. Set output directory: `build`
-5. Add environment variables
+5. Add environment variables:
+   ```env
+   REACT_APP_API_URL=https://your-backend-api-url/api
+   REACT_APP_SOCKET_URL=https://your-backend-api-url
+   REACT_APP_ENV=production
+   REACT_APP_CLIENT_URL=https://virtual-study-group-hazel.vercel.app
+   REACT_APP_PRODUCTION_URL=https://virtual-study-group-hazel.vercel.app
+   ```
 6. Deploy
+
+**Production Frontend URL:** `https://virtual-study-group-hazel.vercel.app`
 
 #### Deploy to Docker
 
@@ -974,10 +983,12 @@ volumes:
 
 ### Environment Variables for Production
 
+#### Backend (.env.production)
 ```env
 NODE_ENV=production
 PORT=5000
-CLIENT_URL=https://yourdomain.com
+CLIENT_URL=https://virtual-study-group-hazel.vercel.app
+PRODUCTION_CLIENT_URL=https://virtual-study-group-hazel.vercel.app
 
 # Database
 MONGO_URI=mongodb+srv://user:pass@cluster.mongodb.net/vstudy
@@ -998,6 +1009,15 @@ GOOGLE_API_KEY=your_api_key
 
 # Logging
 LOG_LEVEL=info
+```
+
+#### Frontend (.env.production)
+```env
+REACT_APP_API_URL=https://virtualstudygroup.onrender.com/api
+REACT_APP_SOCKET_URL=https://virtualstudygroup.onrender.com
+REACT_APP_ENV=production
+REACT_APP_CLIENT_URL=https://virtual-study-group-hazel.vercel.app
+REACT_APP_PRODUCTION_URL=https://virtual-study-group-hazel.vercel.app
 ```
 
 ### Production Checklist
