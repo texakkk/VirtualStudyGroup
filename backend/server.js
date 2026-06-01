@@ -20,7 +20,10 @@ const { initializeRedis, closeRedis } = require('./config/redis');
   }
 });
 
-const allowedOrigins = [process.env.CLIENT_URL || "http://localhost:3000"];
+const allowedOrigins = [
+  process.env.CLIENT_URL || "http://localhost:3000",
+  process.env.PRODUCTION_CLIENT_URL || "https://virtual-study-group-hazel.vercel.app"
+].filter(Boolean);
 
 // Create Express and HTTP server
 const app = express();
