@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useKeyboardShortcuts } from '../../hooks/useKeyboardNavigation';
 import { useAccessibilityFeatures } from '../../hooks/useAccessibilityFeatures';
 import './KeyboardNavigationHelper.css';

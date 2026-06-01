@@ -10,7 +10,7 @@ import {
  */
 export const useListKeyboardNavigation = (items, onSelect, options = {}) => {
   const [currentIndex, setCurrentIndex] = useState(options.initialIndex || 0);
-  const { announceChanges = true, loop = false } = options;
+  const { announceChanges = true } = options;
 
   const handleKeyDown = useCallback((event) => {
     const newIndex = handleListKeyNavigation(event, items, currentIndex, onSelect);
@@ -214,10 +214,12 @@ export const useEscapeKey = (callback, enabled = true) => {
   }, [callback, enabled]);
 };
 
-export default {
+const keyboardNavigationHooks = {
   useListKeyboardNavigation,
   useGridKeyboardNavigation,
   useFocusTrap,
   useKeyboardShortcuts,
   useEscapeKey
 };
+
+export default keyboardNavigationHooks;

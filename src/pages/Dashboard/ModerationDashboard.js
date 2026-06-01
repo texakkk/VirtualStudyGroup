@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import api from '../../api';
 import './ModerationDashboard.css';
 
@@ -23,15 +23,7 @@ const ModerationDashboard = ({ groupId, onClose }) => {
     }
   };
 
-  useEffect(() => {
-    if (groupId) {
-      fetchReports();
-      fetchStats();
-      fetchModerationSettings();
-    }
-  }, [groupId, filterStatus]);
-
-  const fetchReports = async () => {
+  const fetchReports = useCallback(async () => {
     try {
       const token = localStorage.getItem('token');
       const response = await api.get(`/content-moderation/${groupId}/reports`, {
@@ -50,9 +42,9 @@ const ModerationDashboard = ({ groupId, onClose }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [groupId, filterStatus]);
 
-  const fetchStats = async () => {
+  const fetchStats = useCallback(async () => {
     try {
       const token = localStorage.getItem('token');
       const response = await api.get(`/content-moderation/${groupId}/stats`, {
@@ -65,9 +57,9 @@ const ModerationDashboard = ({ groupId, onClose }) => {
     } catch (error) {
       console.error('Failed to load stats:', error);
     }
-  };
+  }, [groupId]);
 
-  const fetchModerationSettings = async () => {
+  const fetchModerationSettings = useCallback(async () => {
     try {
       const token = localStorage.getItem('token');
       const response = await api.get(`/group/${groupId}/settings`, {
@@ -88,7 +80,18 @@ const ModerationDashboard = ({ groupId, onClose }) => {
       console.error('Failed to load moderation settings:', error);
       setModerationSettings(defaultModerationSettings);
     }
-  };
+  }, [groupId, defaultModerationSettings]);
+
+  useEffect(() => {
+    const loadData = async () => {
+      if (groupId) {
+        await fetchReports();
+        await fetchStats();
+        await fetchModerationSettings();
+      }
+    };
+    loadData();
+  }, [groupId, filterStatus, fetchReports, fetchStats, fetchModerationSettings]);
 
   const handleUpdateModerationSettings = async (updatedSettings) => {
     try {

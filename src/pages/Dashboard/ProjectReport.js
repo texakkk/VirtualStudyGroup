@@ -46,19 +46,24 @@ const sanitizeText = (text) => {
 const sanitizeFileName = (fileName) => {
   if (!fileName || typeof fileName !== "string") return "unknown_file";
 
-  return (
-    fileName
-      // Remove path separators and dangerous characters
-      .replace(/[<>:"/\\|?*\x00-\x1f]/g, "_")
-      // Replace spaces with underscores
-      .replace(/\s+/g, "_")
-      // Remove multiple underscores
-      .replace(/_+/g, "_")
-      // Remove leading/trailing underscores
-      .replace(/^_+|_+$/g, "")
-      // Limit length
-      .substring(0, 100) || "unknown_file"
-  );
+  let result = fileName
+    // Remove path separators and dangerous characters
+    .replace(/[<>:"/\\|?*]/g, "_")
+    // Replace spaces with underscores
+    .replace(/\s+/g, "_")
+    // Remove multiple underscores
+    .replace(/_+/g, "_")
+    // Remove leading/trailing underscores
+    .replace(/^_+|_+$/g, "");
+
+  // Remove control characters separately to avoid regex control character warnings
+  result = result.split('').filter(char => {
+    const code = char.charCodeAt(0);
+    return code > 31; // Keep characters with code > 31
+  }).join('');
+
+  // Limit length
+  return (result.substring(0, 100)) || "unknown_file";
 };
 
 const cleanTextForExport = (text, maxLength = 1000) => {
@@ -237,6 +242,47 @@ const ProjectReport = () => {
 
         // Calculate overall analytics
         console.log("Groups data for analytics:", groupsWithMemberCounts);
+        
+        // Define calculateOverallAnalytics inside useEffect to avoid dependency issues
+        const calculateGrowthRate = (groups) => {
+          if (!groups || !Array.isArray(groups) || groups.length === 0) {
+            return 0;
+          }
+          const now = new Date();
+          const lastMonth = subDays(now, 30);
+          const recentGroups = groups.filter(
+            (group) =>
+              group.Group_createdAt && new Date(group.Group_createdAt) > lastMonth
+          ).length;
+          return ((recentGroups / groups.length) * 100).toFixed(1);
+        };
+        
+        const calculateOverallAnalytics = (groups) => {
+          if (!groups || !Array.isArray(groups)) {
+            setAnalytics({
+              totalGroups: 0,
+              activeGroups: 0,
+              inactiveGroups: 0,
+              groupGrowth: 0,
+            });
+            return;
+          }
+
+          const totalGroups = groups.length;
+          const activeGroups = groups.filter(
+            (group) =>
+              group.Group_updatedAt &&
+              new Date(group.Group_updatedAt) > subDays(new Date(), 7)
+          ).length;
+
+          setAnalytics({
+            totalGroups,
+            activeGroups,
+            inactiveGroups: totalGroups - activeGroups,
+            groupGrowth: calculateGrowthRate(groups),
+          });
+        };
+        
         calculateOverallAnalytics(groupsWithMemberCounts);
       } catch (err) {
         console.error("Error fetching user or group data:", err);
@@ -256,7 +302,7 @@ const ProjectReport = () => {
       const groupIdStr = typeof selectedGroup._id === 'object' ? String(selectedGroup._id) : selectedGroup._id;
       fetchGroupDetails(groupIdStr, selectedPeriod);
     }
-  }, [selectedPeriod]);
+  }, [selectedPeriod, selectedGroup]);
 
   // Auto-refresh functionality
   useEffect(() => {
@@ -273,47 +319,6 @@ const ProjectReport = () => {
       if (interval) clearInterval(interval);
     };
   }, [autoRefresh, selectedGroup, selectedPeriod]);
-
-  const calculateOverallAnalytics = (groups) => {
-    if (!groups || !Array.isArray(groups)) {
-      setAnalytics({
-        totalGroups: 0,
-        activeGroups: 0,
-        inactiveGroups: 0,
-        groupGrowth: 0,
-      });
-      return;
-    }
-
-    const totalGroups = groups.length;
-    const activeGroups = groups.filter(
-      (group) =>
-        group.Group_updatedAt &&
-        new Date(group.Group_updatedAt) > subDays(new Date(), 7)
-    ).length;
-
-    setAnalytics({
-      totalGroups,
-      activeGroups,
-      inactiveGroups: totalGroups - activeGroups,
-      groupGrowth: calculateGrowthRate(groups),
-    });
-  };
-
-  const calculateGrowthRate = (groups) => {
-    if (!groups || !Array.isArray(groups) || groups.length === 0) {
-      return 0;
-    }
-
-    const now = new Date();
-    const lastMonth = subDays(now, 30);
-    const recentGroups = groups.filter(
-      (group) =>
-        group.Group_createdAt && new Date(group.Group_createdAt) > lastMonth
-    ).length;
-
-    return ((recentGroups / groups.length) * 100).toFixed(1);
-  };
 
   const fetchGroupDetails = async (groupId, period = "30d") => {
     setLoading(true);

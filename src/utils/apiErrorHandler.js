@@ -137,7 +137,7 @@ export const isValidFileSize = (file, maxSize) => {
   return file.size <= maxSize;
 };
 
-export default {
+const apiErrorHandlerExports = {
   getErrorMessage,
   isNetworkError,
   isAuthError,
@@ -149,3 +149,5 @@ export default {
   isValidFileType,
   isValidFileSize,
 };
+
+export default apiErrorHandlerExports;

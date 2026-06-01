@@ -1342,12 +1342,18 @@ const Video = ({ peer }) => {
       } else if (peer.removeListener) {
         peer.removeListener("stream", handleStream);
       }
-      
-      if (ref.current) {
-        ref.current.srcObject = null;
-      }
     };
   }, [peer]);
+  
+  // Handle ref cleanup to avoid stale ref in cleanup
+  useEffect(() => {
+    const videoRef = ref.current;
+    return () => {
+      if (videoRef) {
+        videoRef.srcObject = null;
+      }
+    };
+  }, []);
   
   // Add error handling for the video element
   const handleVideoError = (e) => {

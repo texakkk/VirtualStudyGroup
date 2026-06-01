@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import api from '../../api';
 import './GroupCalendar.css';
 
@@ -31,15 +31,7 @@ const GroupCalendar = ({ groupId, onClose }) => {
   const [canManageCalendar, setCanManageCalendar] = useState(false);
   const [newEvent, setNewEvent] = useState(createEmptyEvent);
 
-  useEffect(() => {
-    if (groupId) {
-      fetchEvents();
-      fetchAnalytics();
-      fetchCalendarPermission();
-    }
-  }, [groupId, currentDate]);
-
-  const fetchEvents = async () => {
+  const fetchEvents = useCallback(async () => {
     try {
       setLoading(true);
       const token = localStorage.getItem('token');
@@ -62,9 +54,9 @@ const GroupCalendar = ({ groupId, onClose }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [groupId, currentDate]);
 
-  const fetchAnalytics = async () => {
+  const fetchAnalytics = useCallback(async () => {
     try {
       const token = localStorage.getItem('token');
       const response = await api.get(`/group-events/${groupId}/summary`, {
@@ -77,9 +69,9 @@ const GroupCalendar = ({ groupId, onClose }) => {
     } catch (error) {
       console.error('Failed to load calendar summary:', error);
     }
-  };
+  }, [groupId]);
 
-  const fetchCalendarPermission = async () => {
+  const fetchCalendarPermission = useCallback(async () => {
     try {
       const token = localStorage.getItem('token');
       const response = await api.get(`/group/${groupId}/permissions/manageCalendar`, {
@@ -92,7 +84,15 @@ const GroupCalendar = ({ groupId, onClose }) => {
     } catch (error) {
       setCanManageCalendar(false);
     }
-  };
+  }, [groupId]);
+
+  useEffect(() => {
+    if (groupId) {
+      fetchEvents();
+      fetchAnalytics();
+      fetchCalendarPermission();
+    }
+  }, [groupId, currentDate, fetchEvents, fetchAnalytics, fetchCalendarPermission]);
 
   const handleCreateEvent = async (e) => {
     e.preventDefault();
@@ -128,7 +128,7 @@ const GroupCalendar = ({ groupId, onClose }) => {
         setShowEventModal(false);
         setNewEvent(createEmptyEvent());
         setNotification({ message: 'Event created successfully', type: 'success' });
-        fetchAnalytics();
+        await fetchAnalytics();
       }
     } catch (error) {
       setNotification({

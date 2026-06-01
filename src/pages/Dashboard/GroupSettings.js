@@ -99,14 +99,6 @@ const GroupSettings = ({ groupId, onClose }) => {
     }
   });
 
-  useEffect(() => {
-    if (groupId) {
-      fetchGroupSettings();
-      fetchSubGroups();
-      fetchRoles();
-    }
-  }, [groupId]);
-
   const fetchGroupSettings = async () => {
     try {
       const token = localStorage.getItem('token');
