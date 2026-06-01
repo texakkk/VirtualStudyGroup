@@ -1,0 +1,6 @@
+{"timestamp":"2026-05-01T08:51:05.658Z","level":"INFO","service":"Performance","message":"Resource monitoring started","interval":"60000ms","environment":"development","pid":11064}
+{"timestamp":"2026-05-01T11:20:18.163Z","level":"INFO","service":"Performance","message":"Resource monitoring started","interval":"60000ms","environment":"development","pid":7716}
+{"timestamp":"2026-05-01T11:58:53.255Z","level":"INFO","service":"Performance","message":"Resource monitoring started","interval":"60000ms","environment":"development","pid":8444}
+{"timestamp":"2026-05-01T18:49:37.612Z","level":"INFO","service":"Performance","message":"Resource monitoring started","interval":"60000ms","environment":"development","pid":9868}
+{"timestamp":"2026-05-01T19:31:55.085Z","level":"INFO","service":"Performance","message":"Resource monitoring started","interval":"60000ms","environment":"development","pid":4248}
+{"timestamp":"2026-05-01T20:20:17.340Z","level":"INFO","service":"Performance","message":"Resource monitoring started","interval":"60000ms","environment":"development","pid":8236}

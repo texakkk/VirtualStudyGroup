@@ -1,0 +1,56 @@
+/* src/App.css */
+
+/* Container for the entire app */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f4f5f7;
+  font-family: 'Arial', sans-serif;
+}
+
+/* General styles for public pages */
+.page-container {
+  padding: 40px 20px;
+  text-align: center;
+  flex-grow: 1; /* Pushes footer to the bottom of the page */
+}
+
+/* Make sure that Routes don't overlap with the footer */
+.page-container p {
+  font-size: 18px;
+  color: #333;
+}
+
+h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+button {
+  background-color: #7289da;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #5b6ea6;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+  }
+
+  .footer {
+    font-size: 14px;
+  }
+}

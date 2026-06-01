@@ -1,0 +1,4 @@
+{"timestamp":"2026-05-23T09:45:28.793Z","level":"INFO","service":"Performance","message":"Resource monitoring started","interval":"60000ms","environment":"development","pid":17912}
+{"timestamp":"2026-05-23T11:13:12.905Z","level":"INFO","service":"Performance","message":"Resource monitoring started","interval":"60000ms","environment":"development","pid":6608}
+{"timestamp":"2026-05-23T11:37:12.680Z","level":"INFO","service":"Performance","message":"Resource monitoring started","interval":"60000ms","environment":"development","pid":17076}
+{"timestamp":"2026-05-23T12:07:08.222Z","level":"INFO","service":"Performance","message":"Resource monitoring started","interval":"60000ms","environment":"development","pid":18224}

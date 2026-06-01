@@ -1,0 +1,40 @@
+/* Simple Message Actions Positioning Only */
+.chat-message-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.message:hover .chat-message-actions,
+.chat-message-actions.visible {
+  opacity: 1;
+}
+
+.chat-action-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+}
+
+.chat-action-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .chat-message-actions {
+    opacity: 1;
+    position: static;
+    margin-top: 0.25rem;
+  }
+}

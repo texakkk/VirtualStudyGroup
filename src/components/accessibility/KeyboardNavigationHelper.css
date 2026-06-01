@@ -1,0 +1,215 @@
+.keyboard-help-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.reduced-motion .keyboard-help-overlay {
+  animation: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.keyboard-help-content {
+  background-color: var(--bg-color, #ffffff);
+  color: var(--text-color, #1e293b);
+  border-radius: 12px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease-out;
+}
+
+.reduced-motion .keyboard-help-content {
+  animation: none;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.keyboard-help-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border-color, #e2e8f0);
+}
+
+.keyboard-help-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.keyboard-help-close {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--text-color, #1e293b);
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.keyboard-help-close:hover {
+  background-color: var(--hover-bg, #f1f5f9);
+}
+
+.keyboard-help-close:focus {
+  outline: 3px solid var(--primary-color, #3b82f6);
+  outline-offset: 2px;
+}
+
+.keyboard-help-body {
+  padding: 1.5rem;
+}
+
+.keyboard-shortcuts-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.keyboard-shortcuts-table th {
+  text-align: left;
+  padding: 0.75rem;
+  font-weight: 600;
+  border-bottom: 2px solid var(--border-color, #e2e8f0);
+  background-color: var(--hover-bg, #f8fafc);
+}
+
+.keyboard-shortcuts-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--border-color, #e2e8f0);
+}
+
+.keyboard-shortcuts-table tr:last-child td {
+  border-bottom: none;
+}
+
+.keyboard-key {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  background-color: var(--hover-bg, #f1f5f9);
+  border: 1px solid var(--border-color, #cbd5e1);
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.875rem;
+  font-weight: 600;
+  box-shadow: 0 2px 0 var(--border-color, #cbd5e1);
+}
+
+.keyboard-help-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--border-color, #e2e8f0);
+  background-color: var(--hover-bg, #f8fafc);
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--text-color, #64748b);
+}
+
+.keyboard-help-trigger {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--primary-color, #3b82f6);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+  z-index: 1000;
+}
+
+.keyboard-help-trigger:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.keyboard-help-trigger:focus {
+  outline: 3px solid var(--primary-color, #3b82f6);
+  outline-offset: 3px;
+}
+
+.reduced-motion .keyboard-help-trigger {
+  transition: none;
+}
+
+.reduced-motion .keyboard-help-trigger:hover {
+  transform: none;
+}
+
+/* High contrast mode */
+.high-contrast .keyboard-help-content {
+  border: 3px solid var(--border-color, #ffffff);
+}
+
+.high-contrast .keyboard-key {
+  background-color: var(--bg-secondary, #1a1a1a);
+  border-color: var(--border-color, #ffffff);
+  color: var(--text-secondary, #ffff00);
+}
+
+.high-contrast .keyboard-help-trigger {
+  border: 3px solid var(--border-color, #ffffff);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .keyboard-help-content {
+    width: 95%;
+    max-height: 90vh;
+  }
+
+  .keyboard-help-header h2 {
+    font-size: 1.25rem;
+  }
+
+  .keyboard-shortcuts-table th,
+  .keyboard-shortcuts-table td {
+    padding: 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  .keyboard-help-trigger {
+    bottom: 15px;
+    right: 15px;
+    width: 45px;
+    height: 45px;
+    font-size: 1.25rem;
+  }
+}

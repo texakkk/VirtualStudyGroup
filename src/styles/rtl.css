@@ -1,0 +1,396 @@
+/* RTL (Right-to-Left) Language Support Styles */
+
+/* Base RTL styles */
+body.rtl {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Flip margins and paddings */
+body.rtl .MuiBox-root,
+body.rtl .MuiPaper-root,
+body.rtl .MuiCard-root {
+  direction: rtl;
+}
+
+/* Flip flex direction for specific components */
+body.rtl .flex-row {
+  flex-direction: row-reverse;
+}
+
+/* Flip text alignment */
+body.rtl .text-left {
+  text-align: right;
+}
+
+body.rtl .text-right {
+  text-align: left;
+}
+
+/* Flip float */
+body.rtl .float-left {
+  float: right;
+}
+
+body.rtl .float-right {
+  float: left;
+}
+
+/* Flip margins */
+body.rtl .ml-1 { margin-left: 0; margin-right: 0.25rem; }
+body.rtl .ml-2 { margin-left: 0; margin-right: 0.5rem; }
+body.rtl .ml-3 { margin-left: 0; margin-right: 1rem; }
+body.rtl .ml-4 { margin-left: 0; margin-right: 1.5rem; }
+body.rtl .ml-5 { margin-left: 0; margin-right: 3rem; }
+
+body.rtl .mr-1 { margin-right: 0; margin-left: 0.25rem; }
+body.rtl .mr-2 { margin-right: 0; margin-left: 0.5rem; }
+body.rtl .mr-3 { margin-right: 0; margin-left: 1rem; }
+body.rtl .mr-4 { margin-right: 0; margin-left: 1.5rem; }
+body.rtl .mr-5 { margin-right: 0; margin-left: 3rem; }
+
+/* Flip paddings */
+body.rtl .pl-1 { padding-left: 0; padding-right: 0.25rem; }
+body.rtl .pl-2 { padding-left: 0; padding-right: 0.5rem; }
+body.rtl .pl-3 { padding-left: 0; padding-right: 1rem; }
+body.rtl .pl-4 { padding-left: 0; padding-right: 1.5rem; }
+body.rtl .pl-5 { padding-left: 0; padding-right: 3rem; }
+
+body.rtl .pr-1 { padding-right: 0; padding-left: 0.25rem; }
+body.rtl .pr-2 { padding-right: 0; padding-left: 0.5rem; }
+body.rtl .pr-3 { padding-right: 0; padding-left: 1rem; }
+body.rtl .pr-4 { padding-right: 0; padding-left: 1.5rem; }
+body.rtl .pr-5 { padding-right: 0; padding-left: 3rem; }
+
+/* Flip border radius */
+body.rtl .rounded-l { border-radius: 0 0.25rem 0.25rem 0; }
+body.rtl .rounded-r { border-radius: 0.25rem 0 0 0.25rem; }
+body.rtl .rounded-tl { border-top-left-radius: 0; border-top-right-radius: 0.25rem; }
+body.rtl .rounded-tr { border-top-right-radius: 0; border-top-left-radius: 0.25rem; }
+body.rtl .rounded-bl { border-bottom-left-radius: 0; border-bottom-right-radius: 0.25rem; }
+body.rtl .rounded-br { border-bottom-right-radius: 0; border-bottom-left-radius: 0.25rem; }
+
+/* Flip transforms */
+body.rtl .transform-rotate-90 {
+  transform: rotate(-90deg);
+}
+
+body.rtl .transform-rotate-180 {
+  transform: rotate(180deg);
+}
+
+/* Material-UI specific RTL adjustments */
+body.rtl .MuiDrawer-paperAnchorLeft {
+  left: auto;
+  right: 0;
+}
+
+body.rtl .MuiDrawer-paperAnchorRight {
+  right: auto;
+  left: 0;
+}
+
+body.rtl .MuiListItemIcon-root {
+  margin-right: 0;
+  margin-left: 16px;
+}
+
+body.rtl .MuiListItemText-root {
+  text-align: right;
+}
+
+body.rtl .MuiChip-deleteIcon {
+  margin-left: -6px;
+  margin-right: 5px;
+}
+
+body.rtl .MuiAlert-icon {
+  margin-right: 0;
+  margin-left: 12px;
+}
+
+body.rtl .MuiAlert-action {
+  margin-right: auto;
+  margin-left: 0;
+  padding-left: 0;
+  padding-right: 16px;
+}
+
+/* Input fields */
+body.rtl input,
+body.rtl textarea,
+body.rtl .MuiInputBase-input {
+  text-align: right;
+}
+
+/* Buttons with icons */
+body.rtl .MuiButton-startIcon {
+  margin-left: 8px;
+  margin-right: -4px;
+}
+
+body.rtl .MuiButton-endIcon {
+  margin-right: 8px;
+  margin-left: -4px;
+}
+
+/* Tooltips */
+body.rtl .MuiTooltip-tooltip {
+  text-align: right;
+}
+
+/* Breadcrumbs */
+body.rtl .MuiBreadcrumbs-separator {
+  transform: scaleX(-1);
+}
+
+/* Tabs */
+body.rtl .MuiTabs-scrollButtons {
+  transform: scaleX(-1);
+}
+
+/* Stepper */
+body.rtl .MuiStepConnector-root {
+  left: auto;
+  right: calc(-50% + 20px);
+}
+
+body.rtl .MuiStepLabel-iconContainer {
+  padding-right: 0;
+  padding-left: 8px;
+}
+
+/* Menu */
+body.rtl .MuiMenu-list {
+  text-align: right;
+}
+
+/* Dialog */
+body.rtl .MuiDialogActions-root {
+  flex-direction: row-reverse;
+}
+
+/* Snackbar */
+body.rtl .MuiSnackbar-anchorOriginTopRight {
+  top: 24px;
+  right: auto;
+  left: 24px;
+}
+
+body.rtl .MuiSnackbar-anchorOriginBottomRight {
+  bottom: 24px;
+  right: auto;
+  left: 24px;
+}
+
+body.rtl .MuiSnackbar-anchorOriginTopLeft {
+  top: 24px;
+  left: auto;
+  right: 24px;
+}
+
+body.rtl .MuiSnackbar-anchorOriginBottomLeft {
+  bottom: 24px;
+  left: auto;
+  right: 24px;
+}
+
+/* Custom scrollbar for RTL */
+body.rtl ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+body.rtl ::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+body.rtl ::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+body.rtl ::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Ant Design RTL adjustments */
+body.rtl .ant-layout-sider {
+  left: auto;
+  right: 0;
+}
+
+body.rtl .ant-menu-item,
+body.rtl .ant-menu-submenu-title {
+  text-align: right;
+}
+
+body.rtl .ant-menu-item-icon {
+  margin-right: 0;
+  margin-left: 10px;
+}
+
+body.rtl .ant-drawer-left {
+  left: auto;
+  right: 0;
+}
+
+body.rtl .ant-drawer-right {
+  right: auto;
+  left: 0;
+}
+
+/* React Quill RTL support */
+body.rtl .ql-editor {
+  direction: rtl;
+  text-align: right;
+}
+
+body.rtl .ql-toolbar {
+  direction: rtl;
+}
+
+/* Chat messages RTL */
+body.rtl .message-container {
+  flex-direction: row-reverse;
+}
+
+body.rtl .message-bubble {
+  text-align: right;
+}
+
+body.rtl .message-timestamp {
+  text-align: left;
+}
+
+/* File upload RTL */
+body.rtl .file-upload-area {
+  direction: rtl;
+}
+
+/* Video player controls RTL */
+body.rtl .video-controls {
+  direction: rtl;
+}
+
+/* Whiteboard RTL */
+body.rtl .whiteboard-toolbar {
+  left: auto;
+  right: 0;
+}
+
+/* Notification panel RTL */
+body.rtl .notification-panel {
+  left: auto;
+  right: 0;
+}
+
+/* User profile RTL */
+body.rtl .user-profile-menu {
+  left: auto;
+  right: 0;
+}
+
+/* Group sidebar RTL */
+body.rtl .group-sidebar {
+  left: auto;
+  right: 0;
+}
+
+/* Task list RTL */
+body.rtl .task-list-item {
+  flex-direction: row-reverse;
+}
+
+body.rtl .task-checkbox {
+  margin-right: 0;
+  margin-left: 12px;
+}
+
+/* Calendar RTL */
+body.rtl .calendar-header {
+  flex-direction: row-reverse;
+}
+
+body.rtl .calendar-nav-button {
+  transform: scaleX(-1);
+}
+
+/* Search bar RTL */
+body.rtl .search-icon {
+  left: auto;
+  right: 12px;
+}
+
+body.rtl .search-input {
+  padding-left: 12px;
+  padding-right: 40px;
+}
+
+/* Dropdown menu RTL */
+body.rtl .dropdown-menu {
+  left: auto;
+  right: 0;
+}
+
+/* Badge RTL */
+body.rtl .badge {
+  left: auto;
+  right: -8px;
+}
+
+/* Avatar group RTL */
+body.rtl .avatar-group {
+  flex-direction: row-reverse;
+}
+
+body.rtl .avatar-group .avatar {
+  margin-left: -8px;
+  margin-right: 0;
+}
+
+/* Progress bar RTL */
+body.rtl .progress-bar {
+  direction: ltr; /* Keep progress bars LTR for consistency */
+}
+
+/* Emoji picker RTL */
+body.rtl .emoji-picker {
+  direction: rtl;
+}
+
+/* Code editor RTL (keep LTR for code) */
+body.rtl .code-editor,
+body.rtl pre,
+body.rtl code {
+  direction: ltr;
+  text-align: left;
+}
+
+/* Accessibility: Focus indicators */
+body.rtl *:focus {
+  outline-offset: 2px;
+}
+
+/* Print styles for RTL */
+@media print {
+  body.rtl {
+    direction: rtl;
+  }
+}
+
+/* Mobile responsive RTL adjustments */
+@media (max-width: 768px) {
+  body.rtl .mobile-menu {
+    left: auto;
+    right: 0;
+  }
+  
+  body.rtl .mobile-drawer {
+    transform: translateX(100%);
+  }
+  
+  body.rtl .mobile-drawer.open {
+    transform: translateX(0);
+  }
+}

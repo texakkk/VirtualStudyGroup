@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="Virtual study group"
+      content="Study Hub Platform"
+    />
+    <link rel="apple-touch-icon" href="logo512.png" />
+    
+    <!-- Comprehensive polyfills for WebRTC libraries -->
+    <script>
+      // Global polyfill
+      if (typeof global === 'undefined') {
+        var global = globalThis;
+      }
+      
+      // Process polyfill with comprehensive Node.js compatibility
+      if (typeof process === 'undefined') {
+        var process = {
+          env: {
+            NODE_ENV: 'development'
+          },
+          browser: true,
+          version: '16.0.0',
+          versions: {
+            node: '16.0.0'
+          },
+          nextTick: function(callback) {
+            if (typeof callback === 'function') {
+              setTimeout(callback, 0);
+            }
+          },
+          stdout: {
+            write: function() {}
+          },
+          stderr: {
+            write: function() {}
+          }
+        };
+      }
+      
+      // Buffer polyfill
+      if (typeof Buffer === 'undefined') {
+        var Buffer = {
+          isBuffer: function() { return false; },
+          from: function(data) { return new Uint8Array(data); },
+          alloc: function(size) { return new Uint8Array(size); }
+        };
+      }
+      
+      // Enhanced stream polyfill to fix _readableState errors
+      if (typeof require === 'undefined') {
+        var require = function(module) {
+          if (module === 'stream') {
+            function MockReadable() {
+              this._readableState = {
+                objectMode: false,
+                highWaterMark: 16384,
+                buffer: { head: null, tail: null, length: 0 },
+                length: 0,
+                pipes: null,
+                pipesCount: 0,
+                flowing: null,
+                ended: false,
+                endEmitted: false,
+                reading: false,
+                sync: true,
+                needReadable: false,
+                emittedReadable: false,
+                readableListening: false,
+                resumeScheduled: false,
+                destroyed: false,
+                defaultEncoding: 'utf8',
+                awaitDrain: 0,
+                readingMore: false,
+                decoder: null,
+                encoding: null
+              };
+            }
+            
+            function MockWritable() {
+              this._writableState = {
+                objectMode: false,
+                highWaterMark: 16384,
+                buffer: { head: null, tail: null, length: 0 },
+                length: 0,
+                writing: false,
+                corked: 0,
+                sync: true,
+                bufferProcessing: false,
+                needDrain: false,
+                ending: false,
+                ended: false,
+                finished: false,
+                destroyed: false,
+                decodeStrings: true,
+                defaultEncoding: 'utf8'
+              };
+            }
+            
+            return {
+              Readable: MockReadable,
+              Writable: MockWritable
+            };
+          }
+          return {};
+        };
+      }
+      
+      // Additional polyfill for setImmediate
+      if (typeof setImmediate === 'undefined') {
+        var setImmediate = function(callback) {
+          return setTimeout(callback, 0);
+        };
+        var clearImmediate = function(id) {
+          return clearTimeout(id);
+        };
+      }
+    </script>
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>Vstudy</title>
+    <!-- CSP: allow unsafe-eval for webpack dev source maps; tighten in production build -->
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://www.youtube.com https://s.ytimg.com;
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      font-src 'self' https://fonts.gstatic.com data:;
+      img-src 'self' data: blob: https: http://localhost:5001;
+      connect-src 'self' http://localhost:5001 ws://localhost:5001 ws://localhost:3000 http://localhost:3000 https://www.youtube.com https://s.ytimg.com;
+      media-src 'self' blob: http://localhost:5001;
+      worker-src 'self' blob:;
+      frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com;
+      object-src 'none';
+    " />
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>

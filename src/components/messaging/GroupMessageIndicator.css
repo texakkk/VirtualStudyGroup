@@ -1,0 +1,56 @@
+/* Group Message Indicator */
+.group-message-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.125rem 0.5rem;
+  background-color: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #2563eb;
+  margin-bottom: 0.25rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: fit-content;
+}
+
+.group-message-indicator:hover {
+  background-color: rgba(59, 130, 246, 0.15);
+  border-color: rgba(59, 130, 246, 0.3);
+  transform: translateY(-1px);
+}
+
+.group-indicator-icon {
+  font-size: 0.625rem;
+  flex-shrink: 0;
+}
+
+.group-indicator-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .group-message-indicator {
+    background-color: rgba(59, 130, 246, 0.2);
+    border-color: rgba(59, 130, 246, 0.3);
+    color: #93c5fd;
+  }
+
+  .group-message-indicator:hover {
+    background-color: rgba(59, 130, 246, 0.25);
+    border-color: rgba(59, 130, 246, 0.4);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .group-indicator-text {
+    max-width: 120px;
+  }
+}

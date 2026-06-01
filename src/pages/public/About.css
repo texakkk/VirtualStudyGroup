@@ -1,0 +1,58 @@
+/* src/pages/About.css */
+.about-container {
+    padding: 2rem;
+    background: hsl(0, 15%, 94%);
+  }
+  
+  .about-content {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+  
+  .about-image img {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 8px;
+  }
+  
+  .about-text h2 {
+    margin-top: 1rem;
+  }
+  
+  .about-text p {
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .about-content {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .about-image img {
+      width: 80%;
+    }
+  
+    .about-text h2 {
+      font-size: 1.8rem;
+    }
+  
+    .about-text p {
+      padding: 0 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .about-image img {
+      width: 100%;
+    }
+  
+    .about-text p {
+      font-size: 0.9rem;
+    }
+  }
+  
+  

@@ -1,0 +1,154 @@
+/* Profile Page Styles */
+.profile-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff;
+  min-height: auto;
+  padding: 20px; /* Add padding for mobile devices */
+}
+
+.error-message {
+  color: #ff4d4f;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+/* Loading Spinner Styles */
+.loading-spinner {
+  color: #1890ff;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Profile Container */
+.profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+/* Profile Card */
+.profile-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+  transition: box-shadow 0.3s ease;
+}
+
+.profile-card:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Profile Image */
+.profile-image {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border: 5px solid #1890ff;
+  margin-bottom: 20px;
+}
+
+/* Profile Name */
+.profile-name {
+  font-size: 26px;
+  font-weight: bold;
+  color: #333333;
+}
+
+/* Profile Email */
+.profile-email {
+  font-size: 18px;
+  color: #666666;
+  margin-bottom: 15px;
+}
+
+/* Profile Role */
+.profile-role {
+  font-size: 20px;
+  color: #1890ff;
+}
+
+/* Profile Details */
+.profile-details {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+  text-align: left;
+  flex-wrap: wrap; /* Allow wrapping on small screens */
+}
+
+.detail-item {
+  flex: 1 1 45%; /* Flex-grow for equal spacing */
+  margin-bottom: 20px;
+}
+
+.detail-item h4 {
+  font-size: 16px;
+  color: #888888;
+  margin-bottom: 5px;
+}
+
+.detail-item p {
+  font-size: 16px;
+  color: #333333;
+}
+
+/* Buttons */
+.edit-button,
+.logout-button {
+  background-color: #1890ff;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: background 0.3s, opacity 0.3s;
+}
+
+.logout-button {
+  background-color: #ff4d4f;
+}
+
+.edit-button:hover,
+.logout-button:hover {
+  opacity: 0.85;
+}
+
+.edit-button:focus,
+.logout-button:focus {
+  outline: none;
+  box-shadow: 0 0 3px 2px rgba(0, 123, 255, 0.5); /* Accessible focus ring */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 576px) {
+  .profile-card {
+    padding: 20px;
+  }
+
+  .profile-image {
+    width: 120px;
+    height: 120px;
+  }
+
+  .profile-name {
+    font-size: 22px;
+  }
+
+  .profile-email,
+  .profile-role {
+    font-size: 16px;
+  }
+
+  .detail-item {
+    flex: 1 1 100%; /* Stack details on small screens */
+  }
+}

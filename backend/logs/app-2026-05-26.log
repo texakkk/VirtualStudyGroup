@@ -1,0 +1,2 @@
+{"timestamp":"2026-05-26T09:43:12.392Z","level":"INFO","service":"Performance","message":"Resource monitoring started","interval":"60000ms","environment":"development","pid":14928}
+{"timestamp":"2026-05-26T10:52:41.590Z","level":"INFO","service":"Performance","message":"Resource monitoring started","interval":"60000ms","environment":"development","pid":19260}

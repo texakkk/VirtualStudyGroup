@@ -1,0 +1,261 @@
+/* src/pages/GetStarted.css */
+.getstarted-container {
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  background: #f8f9fa;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.getstarted-hero {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 0 1rem;
+}
+
+.getstarted-hero h1 {
+  font-size: 2.5rem;
+  color: #28334AFF;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.getstarted-hero p {
+  font-size: 1.2rem;
+  color: #4a5568;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.getstarted-layout {
+  display: grid;
+  grid-template-columns: 1fr 400px 1fr;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  align-items: start;
+}
+
+.left-content,
+.right-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: sticky;
+  top: 2rem;
+}
+
+.center-form {
+  position: relative;
+  height: 100%;
+}
+  
+  .getstarted-form {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    text-align: left;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .form-subtitle {
+    color: #4a5568;
+    margin-bottom: 1.5rem !important;
+    text-align: center;
+  }
+  
+  .getstarted-form h2 {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    color: #28334AFF;
+  }
+  
+  
+  .getstarted-form p {
+  color: #666;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+  .getstarted-form input {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    margin: 0.5rem 0 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  
+  .getstarted-form input:focus {
+    border-color: #28334AFF;
+  }
+  
+  .btn-getstarted {
+    background-color: #28334AFF;
+    color: white;
+    padding: 1rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    margin: 1.5rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.2s, transform 0.1s;
+  }
+  
+  .btn-getstarted:hover {
+    background-color: #1e2a4a;
+    transform: translateY(-1px);
+  }
+  
+  .btn-getstarted:active {
+    transform: translateY(0);
+  }
+  
+  .terms-text {
+    font-size: 0.875rem;
+    color: #718096;
+    text-align: center;
+    margin: 1.5rem 0 0;
+  }
+  
+  .terms-text a {
+    color: #28334AFF;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .login-prompt {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #4a5568;
+  }
+  
+  .login-link {
+    color: #28334AFF;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  
+  .login-link:hover {
+    text-decoration: underline;
+  }
+  
+  /* Feature Cards */
+  
+  .feature-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    text-align: left;
+    transition: transform 0.2s, box-shadow 0.2s;
+    width: 100%;
+  }
+  
+  .feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+  
+  .feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .feature-card h3 {
+    color: #28334AFF;
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+  }
+  
+  .feature-card p {
+    color: #4a5568;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+  
+  /* Testimonial */
+  .testimonial {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    text-align: left;
+  }
+  
+  .testimonials h3 {
+    color: #28334AFF;
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+  }
+  
+
+  
+  .testimonial p {
+    font-style: italic;
+    color: #4a5568;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  
+  .testimonial-author {
+    font-weight: 600;
+    color: #28334AFF !important;
+    margin: 0 !important;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .getstarted-layout {
+      grid-template-columns: 1fr;
+      max-width: 600px;
+    }
+    
+    .left-content,
+    .right-content {
+      position: static;
+      margin-bottom: 2rem;
+    }
+    
+    .center-form {
+      order: -1;
+      margin-bottom: 2rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .getstarted-hero h1 {
+      font-size: 2rem;
+    }
+    
+    .getstarted-layout {
+      padding: 0 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .getstarted-container {
+      padding: 1rem 0.5rem;
+    }
+    
+    .getstarted-hero h1 {
+      font-size: 1.75rem;
+    }
+    
+    .getstarted-hero p {
+      font-size: 1rem;
+    }
+    
+    .getstarted-form,
+    .feature-card,
+    .testimonial {
+      padding: 1.25rem 1rem;
+    }
+  }

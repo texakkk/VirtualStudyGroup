@@ -1,0 +1,112 @@
+/* Settings Container */
+.settings-container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    background-color: #f5f5f5;
+  }
+  
+  /* Sidebar Styles */
+  .settings-sidebar {
+    width: 20%;
+    background-color: #ffffff;
+    border-right: 1px solid #ddd;
+    padding: 20px;
+  }
+  
+  .settings-sidebar h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #007bff;
+  }
+  
+  .settings-sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .settings-sidebar ul li {
+    padding: 15px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin: 10px 0;
+    transition: background 0.3s ease;
+  }
+  
+  .settings-sidebar ul li:hover {
+    background: #f0f8ff;
+  }
+  
+  .settings-sidebar ul li.active {
+    background: #007bff;
+    color: white;
+  }
+  
+  /* Main Content Styles */
+  .settings-content {
+    width: 80%;
+    padding: 30px;
+  }
+  
+  /* Settings Section Styles */
+  .settings-section {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+  
+  .settings-section h3 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .settings-section form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .settings-section label {
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .settings-section input,
+  .settings-section select {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .settings-section button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .settings-section button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .settings-container {
+      flex-direction: column;
+    }
+  
+    .settings-sidebar {
+      width: 100%;
+      border-right: none;
+      border-bottom: 1px solid #ddd;
+    }
+  
+    .settings-content {
+      width: 100%;
+    }
+  }
+  

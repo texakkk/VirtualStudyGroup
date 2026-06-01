@@ -1,0 +1,161 @@
+.file-uploader {
+  padding: 20px;
+}
+
+.file-list {
+  margin-top: 24px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 16px;
+  background: #fafafa;
+}
+
+.file-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.file-list-header h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.file-items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.file-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: white;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.file-item:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.file-item-uploading {
+  border-color: #1890ff;
+  background: #e6f7ff;
+}
+
+.file-item-done {
+  border-color: #52c41a;
+  background: #f6ffed;
+}
+
+.file-item-error {
+  border-color: #ff4d4f;
+  background: #fff2f0;
+}
+
+.file-item-paused {
+  border-color: #faad14;
+  background: #fffbe6;
+}
+
+.file-preview {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0f0f0;
+  border-radius: 4px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.file-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.file-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.file-name {
+  font-weight: 500;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 4px;
+}
+
+.file-meta {
+  font-size: 12px;
+  color: #8c8c8c;
+}
+
+.file-error {
+  color: #ff4d4f;
+}
+
+.file-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .file-uploader {
+    padding: 12px;
+  }
+
+  .file-list {
+    padding: 12px;
+  }
+
+  .file-list-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .file-item {
+    flex-wrap: wrap;
+  }
+
+  .file-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+/* Accessibility */
+.file-item:focus-within {
+  outline: 2px solid #1890ff;
+  outline-offset: 2px;
+}
+
+/* Animation for progress */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.file-item-uploading .file-preview {
+  animation: pulse 2s ease-in-out infinite;
+}

@@ -1,0 +1,7 @@
+.conflict-resolution-ui {
+  margin-bottom: 16px;
+}
+
+.conflict-resolution-ui .ant-alert {
+  border-radius: 4px;
+}

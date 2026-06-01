@@ -1,0 +1,102 @@
+.offline-indicator {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.offline-indicator-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 8px;
+}
+
+.offline-indicator-icon {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.offline-indicator-message {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.offline-indicator-sync-btn {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 4px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.offline-indicator-sync-btn:hover {
+  background: white;
+  border-color: rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.offline-indicator-sync-btn:active {
+  transform: translateY(0);
+}
+
+.offline-status-badge-text {
+  font-size: 12px;
+  margin-left: 4px;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .offline-indicator-content {
+    gap: 8px;
+    padding: 2px 4px;
+  }
+
+  .offline-indicator-message {
+    font-size: 12px;
+  }
+
+  .offline-indicator-sync-btn {
+    padding: 2px 8px;
+    font-size: 12px;
+  }
+}
+
+/* Accessibility */
+.offline-indicator-sync-btn:focus {
+  outline: 2px solid #1890ff;
+  outline-offset: 2px;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .offline-indicator-sync-btn {
+    background: rgba(0, 0, 0, 0.6);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: white;
+  }
+
+  .offline-indicator-sync-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+}

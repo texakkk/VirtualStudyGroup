@@ -1,0 +1,434 @@
+/* Accessibility Styles */
+
+/* Enhanced focus indicators for keyboard navigation */
+.keyboard-navigation-enabled *:focus {
+  outline: 3px solid #4CAF50;
+  outline-offset: 2px;
+}
+
+.keyboard-navigation-enabled button:focus,
+.keyboard-navigation-enabled a:focus {
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3);
+}
+
+.keyboard-navigation-active *:focus-visible {
+  outline: 3px solid #4CAF50;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.enhanced-focus *:focus-visible {
+  outline: 3px solid #4CAF50;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Focus within for containers */
+*:focus-within {
+  outline: none;
+}
+
+.keyboard-navigation-enabled *:focus-within {
+  outline: 2px solid rgba(76, 175, 80, 0.5);
+  outline-offset: 1px;
+}
+
+/* Reduced motion */
+.reduced-motion *,
+.reduced-motion *::before,
+.reduced-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* High contrast mode */
+.high-contrast {
+  --bg-primary: #000000;
+  --bg-secondary: #1a1a1a;
+  --text-primary: #ffffff;
+  --text-secondary: #ffff00;
+  --border-color: #ffffff;
+  --focus-color: #ffff00;
+  --link-color: #00ffff;
+  --error-color: #ff0000;
+  --success-color: #00ff00;
+  --warning-color: #ff8800;
+}
+
+.high-contrast * {
+  border-color: var(--border-color) !important;
+}
+
+.high-contrast a {
+  color: var(--link-color) !important;
+  text-decoration: underline;
+}
+
+.high-contrast button {
+  border: 2px solid var(--border-color) !important;
+  background-color: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+}
+
+.high-contrast *:focus {
+  outline: 3px solid var(--focus-color) !important;
+}
+
+/* Screen reader only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.sr-only-focusable:focus,
+.sr-only-focusable:active {
+  position: static;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* Minimum touch target size */
+button,
+a,
+input[type="checkbox"],
+input[type="radio"],
+select {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Focus trap for modals */
+.focus-trap {
+  position: relative;
+}
+
+/* Live regions */
+[aria-live="polite"],
+[aria-live="assertive"] {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Keyboard navigation hints */
+.keyboard-hint {
+  font-size: 0.875rem;
+  color: #666;
+  margin-top: 0.25rem;
+}
+
+.high-contrast .keyboard-hint {
+  color: var(--text-secondary);
+}
+
+/* Skip to content link */
+.skip-to-content {
+  position: absolute;
+  left: -9999px;
+  z-index: 999;
+  padding: 1em;
+  background-color: #000;
+  color: #fff;
+  text-decoration: none;
+}
+
+.skip-to-content:focus {
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+}
+
+/* Accessible form labels */
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+input:required + label::after,
+label.required::after {
+  content: " *";
+  color: #d32f2f;
+}
+
+/* Error messages */
+.error-message {
+  color: #d32f2f;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+[aria-invalid="true"] {
+  border-color: #d32f2f !important;
+}
+
+/* Loading states */
+[aria-busy="true"] {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Disabled states */
+[aria-disabled="true"],
+:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Focus management for modals */
+.modal-open {
+  overflow: hidden;
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.reduced-motion .modal-backdrop {
+  transition: none;
+}
+
+/* Accessible tables */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th {
+  text-align: left;
+  font-weight: 600;
+  background-color: #f5f5f5;
+}
+
+.high-contrast th {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+/* Accessible navigation */
+nav[aria-label] {
+  position: relative;
+}
+
+/* Tooltip accessibility */
+[role="tooltip"] {
+  position: absolute;
+  z-index: 1000;
+  padding: 0.5rem;
+  background-color: #333;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+.high-contrast [role="tooltip"] {
+  background-color: var(--bg-secondary);
+  color: var(--text-secondary);
+  border: 2px solid var(--border-color);
+}
+
+/* Accessible alerts */
+[role="alert"] {
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 4px;
+  border-left: 4px solid;
+}
+
+[role="alert"].error {
+  background-color: #ffebee;
+  border-color: #d32f2f;
+  color: #c62828;
+}
+
+[role="alert"].success {
+  background-color: #e8f5e9;
+  border-color: #4caf50;
+  color: #2e7d32;
+}
+
+[role="alert"].warning {
+  background-color: #fff3e0;
+  border-color: #ff9800;
+  color: #e65100;
+}
+
+[role="alert"].info {
+  background-color: #e3f2fd;
+  border-color: #2196f3;
+  color: #1565c0;
+}
+
+.high-contrast [role="alert"] {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+/* Accessible progress indicators */
+[role="progressbar"] {
+  height: 8px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+[role="progressbar"] > div {
+  height: 100%;
+  background-color: #4caf50;
+  transition: width 0.3s ease;
+}
+
+.reduced-motion [role="progressbar"] > div {
+  transition: none;
+}
+
+/* Accessible breadcrumbs */
+nav[aria-label="Breadcrumb"] ol {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+nav[aria-label="Breadcrumb"] li:not(:last-child)::after {
+  content: "/";
+  margin: 0 0.5rem;
+  color: #666;
+}
+
+/* Accessible tabs */
+[role="tablist"] {
+  display: flex;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+[role="tab"] {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+}
+
+[role="tab"][aria-selected="true"] {
+  border-bottom-color: #4caf50;
+  font-weight: 600;
+}
+
+[role="tabpanel"] {
+  padding: 1.5rem;
+}
+
+[role="tabpanel"][aria-hidden="true"] {
+  display: none;
+}
+
+/* Accessible accordions */
+[role="button"][aria-expanded] {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #e0e0e0;
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
+
+[role="button"][aria-expanded]::after {
+  content: "\25BC";
+  transition: transform 0.3s ease;
+}
+
+[role="button"][aria-expanded="true"]::after {
+  transform: rotate(180deg);
+}
+
+.reduced-motion [role="button"][aria-expanded]::after {
+  transition: none;
+}
+
+/* Accessible menus */
+[role="menu"] {
+  list-style: none;
+  padding: 0.5rem 0;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+[role="menuitem"] {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+}
+
+[role="menuitem"]:hover,
+[role="menuitem"]:focus {
+  background-color: #f5f5f5;
+}
+
+[role="menuitem"][aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Accessible dialogs */
+[role="dialog"] {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  padding: 2rem;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: auto;
+  z-index: 1001;
+}
+
+.high-contrast [role="dialog"] {
+  background-color: var(--bg-primary);
+  border: 3px solid var(--border-color);
+}
+
+/* Accessible status messages */
+[role="status"] {
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  margin: 0.5rem 0;
+}
+
+/* Print styles for accessibility */
+@media print {
+  .skip-links,
+  [aria-hidden="true"] {
+    display: none !important;
+  }
+  
+  a[href]::after {
+    content: " (" attr(href) ")";
+  }
+}

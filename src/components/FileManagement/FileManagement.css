@@ -1,0 +1,52 @@
+.file-management {
+  width: 100%;
+  min-height: 600px;
+}
+
+.file-management-card {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.file-management-card .ant-card-body {
+  padding: 0;
+}
+
+.file-management .ant-tabs {
+  height: 100%;
+}
+
+.file-management .ant-tabs-nav {
+  padding: 0 24px;
+  margin: 0;
+}
+
+.file-management .ant-tabs-content {
+  height: 100%;
+}
+
+.file-management .ant-tabs-tabpane {
+  padding: 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .file-management {
+    min-height: 400px;
+  }
+
+  .file-management .ant-tabs-nav {
+    padding: 0 12px;
+  }
+
+  .file-management .ant-tabs-tab {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+}
+
+/* Accessibility */
+.file-management:focus-within {
+  outline: 2px solid #1890ff;
+  outline-offset: 2px;
+}

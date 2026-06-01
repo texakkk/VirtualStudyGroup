@@ -1,0 +1,688 @@
+.synchronized-video-player {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: #000;
+  position: relative;
+}
+
+.video-player-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background-color: #1a1a1a;
+  color: #fff;
+  border-bottom: 1px solid #333;
+}
+
+.video-player-title {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.video-player-title h6 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.video-player-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.video-player-actions button {
+  color: #fff;
+}
+
+.video-player-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.video-player-main {
+  flex: 1;
+  position: relative;
+  background-color: #000;
+  display: flex;
+  flex-direction: column;
+}
+
+.video-player-main > div:first-child {
+  flex: 1;
+}
+
+.video-player-controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  padding: 16px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.video-player-main:hover .video-player-controls {
+  opacity: 1;
+}
+
+.video-player-progress {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 6px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+}
+
+.progress-bar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  background: #1976d2;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.progress-bar::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.progress-bar::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  background: #1976d2;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.2s ease;
+}
+
+.progress-bar::-moz-range-thumb:hover {
+  transform: scale(1.2);
+}
+
+.time-display {
+  color: #fff;
+  font-size: 0.875rem;
+  min-width: 100px;
+  text-align: right;
+}
+
+.video-player-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.video-player-buttons button {
+  color: #fff;
+}
+
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 8px;
+}
+
+.volume-slider {
+  width: 80px;
+  height: 4px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.volume-slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}
+
+.video-player-panel {
+  width: 320px;
+  background-color: #1a1a1a;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid #333;
+}
+
+.video-player-panel h6 {
+  color: #fff;
+  margin: 0;
+}
+
+.participants-panel .MuiList-root {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0;
+}
+
+.participants-panel .MuiListItem-root {
+  border-bottom: 1px solid #333;
+}
+
+.participants-panel .MuiListItemText-primary,
+.participants-panel .MuiListItemText-secondary {
+  color: #fff;
+}
+
+.participants-panel .MuiListItemText-secondary {
+  opacity: 0.7;
+}
+
+.chat-panel {
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.chat-message {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.chat-message:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.chat-message .MuiTypography-caption {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.75rem;
+}
+
+.chat-message .MuiTypography-body2 {
+  color: #fff;
+  word-wrap: break-word;
+}
+
+.chat-input {
+  display: flex;
+  padding: 16px;
+  gap: 8px;
+  background-color: #1a1a1a;
+}
+
+.chat-input .MuiTextField-root {
+  flex: 1;
+}
+
+.chat-input .MuiOutlinedInput-root {
+  color: #fff;
+}
+
+.chat-input .MuiOutlinedInput-notchedOutline {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.chat-input .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.chat-input .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #1976d2;
+}
+
+.video-player-loading,
+.video-player-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 32px;
+  background-color: #1a1a1a;
+  color: #fff;
+}
+
+.video-player-loading .MuiCircularProgress-root {
+  color: #1976d2;
+}
+
+/* Fullscreen styles */
+.synchronized-video-player:fullscreen {
+  width: 100vw;
+  height: 100vh;
+}
+
+.synchronized-video-player:fullscreen .video-player-main {
+  height: 100%;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .video-player-panel {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 320px;
+    z-index: 10;
+    box-shadow: -4px 0 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .video-player-header {
+    flex-wrap: wrap;
+  }
+
+  .video-player-title {
+    flex-basis: 100%;
+    margin-bottom: 8px;
+  }
+
+  .volume-control {
+    display: none;
+  }
+}
+
+/* Scrollbar styling */
+.chat-messages::-webkit-scrollbar,
+.participants-panel .MuiList-root::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chat-messages::-webkit-scrollbar-track,
+.participants-panel .MuiList-root::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.chat-messages::-webkit-scrollbar-thumb,
+.participants-panel .MuiList-root::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover,
+.participants-panel .MuiList-root::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Animation for connection quality indicator */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.MuiChip-root[class*="warning"],
+.MuiChip-root[class*="error"] {
+  animation: pulse 2s infinite;
+}
+
+/* Quality menu styling */
+.quality-menu {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  margin-bottom: 8px;
+  background-color: rgba(0, 0, 0, 0.95);
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.quality-menu-item {
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 120px;
+}
+
+.quality-menu-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.quality-menu-item.active {
+  background-color: rgba(25, 118, 210, 0.2);
+  color: #1976d2;
+}
+
+/* Timestamp chip in chat */
+.chat-message .MuiChip-root {
+  transition: all 0.2s ease;
+}
+
+.chat-message .MuiChip-root:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.4);
+}
+
+/* ============================================
+   MOBILE-RESPONSIVE OPTIMIZATIONS - Task 19.1
+   ============================================ */
+
+/* Mobile-first responsive layout */
+@media (max-width: 767px) {
+  .synchronized-video-player {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1300;
+    background: #000;
+  }
+
+  .video-player-header {
+    padding: 8px 12px;
+    flex-wrap: wrap;
+  }
+
+  .video-player-title {
+    font-size: 14px;
+    flex: 1 1 100%;
+    margin-bottom: 8px;
+  }
+
+  .video-player-title h6 {
+    font-size: 1rem;
+  }
+
+  .video-player-actions {
+    gap: 4px;
+  }
+
+  .video-player-actions button {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 8px;
+  }
+
+  /* Mobile video container */
+  .video-player-main {
+    height: 40vh; /* Reduced height on mobile */
+  }
+
+  /* Mobile controls */
+  .video-player-controls {
+    padding: 8px;
+  }
+
+  .video-player-buttons {
+    gap: 8px;
+  }
+
+  .video-player-buttons button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* Mobile progress bar */
+  .progress-bar {
+    height: 6px;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .progress-bar::-webkit-slider-thumb {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Mobile volume control */
+  .volume-control {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .volume-slider {
+    width: 60px;
+  }
+
+  /* Mobile panels */
+  .video-player-panel {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-height: 50vh;
+    border-radius: 16px 16px 0 0;
+    z-index: 1400;
+  }
+
+  .participants-panel,
+  .chat-panel {
+    max-height: 60vh;
+  }
+
+  /* Mobile chat */
+  .chat-messages {
+    max-height: 40vh;
+    padding: 12px;
+  }
+
+  .chat-message {
+    padding: 8px;
+    margin-bottom: 8px;
+  }
+
+  .chat-input {
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .chat-input input {
+    font-size: 16px; /* Prevents zoom on iOS */
+    min-height: 44px;
+  }
+
+  .chat-input button {
+    min-width: 48px;
+    min-height: 44px;
+  }
+
+  /* Mobile annotations */
+  .video-annotation-mobile {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  /* Mobile quality menu */
+  .quality-menu-mobile {
+    position: fixed;
+    bottom: 60px;
+    right: 12px;
+    left: 12px;
+    max-width: none;
+  }
+
+  /* Hide some controls on mobile */
+  .video-player-content {
+    flex-direction: column;
+  }
+
+  /* Mobile timestamp chips */
+  .chat-message .MuiChip-root {
+    height: 24px;
+    font-size: 11px;
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .video-player-header {
+    padding: 12px 16px;
+  }
+
+  .video-player-main {
+    height: 50vh;
+  }
+
+  .video-player-panel {
+    max-width: 350px;
+  }
+
+  .chat-messages {
+    max-height: 50vh;
+  }
+}
+
+/* Landscape mobile optimizations */
+@media (max-width: 767px) and (orientation: landscape) {
+  .video-player-main {
+    height: 100vh;
+  }
+
+  .video-player-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.7), transparent);
+  }
+
+  .video-player-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+  }
+
+  .video-player-panel {
+    max-height: 100vh;
+    max-width: 300px;
+    right: 0;
+    left: auto;
+    bottom: 0;
+    top: 0;
+    border-radius: 0;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  /* Larger touch targets */
+  .video-player-buttons button,
+  .video-player-actions button {
+    min-width: 48px;
+    min-height: 48px;
+  }
+
+  /* Remove hover effects */
+  .video-player-buttons button:hover,
+  .video-player-actions button:hover {
+    background-color: transparent;
+  }
+
+  /* Active states for touch feedback */
+  .video-player-buttons button:active,
+  .video-player-actions button:active {
+    transform: scale(0.95);
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  /* Touch-friendly sliders */
+  .progress-bar::-webkit-slider-thumb {
+    width: 20px;
+    height: 20px;
+  }
+
+  .volume-slider::-webkit-slider-thumb {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* Safe area insets for notched devices */
+@supports (padding: max(0px)) {
+  @media (max-width: 767px) {
+    .video-player-header {
+      padding-top: max(8px, env(safe-area-inset-top));
+      padding-left: max(12px, env(safe-area-inset-left));
+      padding-right: max(12px, env(safe-area-inset-right));
+    }
+
+    .video-player-controls {
+      padding-bottom: max(8px, env(safe-area-inset-bottom));
+      padding-left: max(8px, env(safe-area-inset-left));
+      padding-right: max(8px, env(safe-area-inset-right));
+    }
+
+    .chat-input {
+      padding-bottom: max(12px, env(safe-area-inset-bottom));
+    }
+  }
+}
+
+/* Performance optimizations for mobile */
+@media (max-width: 767px) {
+  .synchronized-video-player * {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+
+  /* Reduce animations on mobile */
+  .synchronized-video-player *,
+  .synchronized-video-player *::before,
+  .synchronized-video-player *::after {
+    animation-duration: 0.2s !important;
+    transition-duration: 0.2s !important;
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .synchronized-video-player * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

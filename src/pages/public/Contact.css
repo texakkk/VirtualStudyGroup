@@ -1,0 +1,121 @@
+/* src/pages/Contact.css */
+
+/* Existing styles remain the same for larger screens */
+.contact-container {
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .contact-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .contact-container p {
+    margin-bottom: 2rem;
+    color: #666;
+  }
+  
+  .contact-form-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .contact-form {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 600px;
+    text-align: left;
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: #FF6F61;
+    outline: none;
+  }
+  
+  .btn-submit {
+    background: #FF6F61;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    width: 100%;
+  }
+  
+  .btn-submit:hover {
+    background: #D7263D;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .contact-container {
+      padding: 1rem;
+    }
+  
+    .contact-form {
+      padding: 1.5rem;
+    }
+  
+    .contact-container h1 {
+      font-size: 2rem;
+    }
+  
+    .contact-container p {
+      margin-bottom: 1rem;
+    }
+  
+    .btn-submit {
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .contact-container {
+      padding: 1rem 0.5rem;
+    }
+  
+    .contact-form {
+      width: 90%;
+      padding: 1rem;
+    }
+  
+    .contact-container h1 {
+      font-size: 1.5rem;
+    }
+  
+    .contact-container p {
+      font-size: 0.9rem;
+    }
+  
+    .btn-submit {
+      padding: 0.5rem;
+      font-size: 0.85rem;
+    }
+  }
+  

@@ -1,0 +1,15 @@
+{"timestamp":"2026-05-25T08:59:00.220Z","level":"INFO","service":"Performance","message":"Resource monitoring started","interval":"60000ms","environment":"development","pid":19920}
+{"timestamp":"2026-05-25T09:09:41.424Z","level":"INFO","service":"Performance","message":"Resource monitoring started","interval":"60000ms","environment":"development","pid":3284}
+{"timestamp":"2026-05-25T09:31:27.395Z","level":"INFO","service":"Performance","message":"Resource monitoring started","interval":"60000ms","environment":"development","pid":23356}
+{"timestamp":"2026-05-25T09:34:27.460Z","level":"INFO","service":"Performance","message":"Resource monitoring started","interval":"60000ms","environment":"development","pid":12796}
+{"timestamp":"2026-05-25T09:47:00.374Z","level":"INFO","service":"Performance","message":"Resource monitoring started","interval":"60000ms","environment":"development","pid":7084}
+{"timestamp":"2026-05-25T09:49:52.094Z","level":"INFO","service":"Performance","message":"Resource monitoring started","interval":"60000ms","environment":"development","pid":18712}
+{"timestamp":"2026-05-25T10:06:45.854Z","level":"INFO","service":"Performance","message":"Resource monitoring started","interval":"60000ms","environment":"development","pid":12124}
+{"timestamp":"2026-05-25T10:29:06.058Z","level":"INFO","service":"Performance","message":"Resource monitoring started","interval":"60000ms","environment":"development","pid":16176}
+{"timestamp":"2026-05-25T10:36:42.130Z","level":"INFO","service":"Performance","message":"Resource monitoring started","interval":"60000ms","environment":"development","pid":17828}
+{"timestamp":"2026-05-25T10:45:51.555Z","level":"INFO","service":"Performance","message":"Resource monitoring started","interval":"60000ms","environment":"development","pid":8220}
+{"timestamp":"2026-05-25T10:52:00.906Z","level":"INFO","service":"Performance","message":"Resource monitoring started","interval":"60000ms","environment":"development","pid":8772}
+{"timestamp":"2026-05-25T11:07:02.770Z","level":"INFO","service":"Performance","message":"Resource monitoring started","interval":"60000ms","environment":"development","pid":12944}
+{"timestamp":"2026-05-25T11:13:14.661Z","level":"INFO","service":"Performance","message":"Resource monitoring started","interval":"60000ms","environment":"development","pid":9520}
+{"timestamp":"2026-05-25T11:19:42.578Z","level":"INFO","service":"Performance","message":"Resource monitoring started","interval":"60000ms","environment":"development","pid":14760}
+{"timestamp":"2026-05-25T11:32:16.390Z","level":"INFO","service":"Performance","message":"Resource monitoring started","interval":"60000ms","environment":"development","pid":5820}

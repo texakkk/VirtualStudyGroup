@@ -1,0 +1,150 @@
+.group-files-tab {
+  padding: 1rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.files-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.files-header h3 {
+  margin: 0;
+  color: #1f2937;
+}
+
+.file-stats {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.file-filters {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid #d1d5db;
+  background: white;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+}
+
+.filter-btn:hover {
+  background-color: #f3f4f6;
+}
+
+.filter-btn.active {
+  background-color: #4f46e5;
+  color: white;
+  border-color: #4f46e5;
+}
+
+.files-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  overflow-y: auto;
+}
+
+.file-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  background: white;
+  transition: all 0.2s;
+}
+
+.file-card:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+.file-icon {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.file-info {
+  margin-bottom: 1rem;
+}
+
+.file-name {
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-bottom: 0.25rem;
+}
+
+.file-date {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.file-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.download-btn {
+  padding: 0.5rem 1rem;
+  background-color: #4f46e5;
+  color: white;
+  text-decoration: none;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  transition: background-color 0.2s;
+}
+
+.download-btn:hover {
+  background-color: #4338ca;
+}
+
+.loading, .no-files {
+  text-align: center;
+  color: #6b7280;
+  padding: 2rem;
+  grid-column: 1 / -1;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .files-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .file-filters {
+    justify-content: center;
+  }
+  
+  .files-header {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+}

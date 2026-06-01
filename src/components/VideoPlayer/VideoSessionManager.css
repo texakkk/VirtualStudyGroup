@@ -1,0 +1,202 @@
+.video-session-manager {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 24px;
+  background-color: #f5f5f5;
+}
+
+.session-manager-container {
+  width: 100%;
+  max-width: 900px;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+}
+
+.session-manager-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+}
+
+.header-title h5 {
+  margin: 0;
+  font-weight: 600;
+}
+
+.session-manager-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 64px;
+}
+
+.session-manager-content {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.active-session-section {
+  margin-bottom: 32px;
+}
+
+.active-session-section h6 {
+  font-weight: 600;
+  color: #1976d2;
+}
+
+.session-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.active-session-card {
+  border: 2px solid #1976d2;
+}
+
+.session-card-content {
+  display: flex;
+  padding: 16px;
+  gap: 16px;
+}
+
+.session-thumbnail {
+  width: 200px;
+  height: 120px;
+  background-size: cover;
+  background-position: center;
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.session-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.session-info h6 {
+  margin: 0 0 8px 0;
+  font-weight: 600;
+}
+
+.session-info .MuiTypography-body2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.session-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+.session-actions {
+  padding: 16px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #e0e0e0;
+}
+
+.session-history-section h6 {
+  font-weight: 600;
+}
+
+.session-history-list {
+  padding: 0;
+}
+
+.history-list-item {
+  padding: 16px;
+  transition: background-color 0.2s ease;
+}
+
+.history-list-item:hover {
+  background-color: #f5f5f5;
+}
+
+.history-list-item .MuiListItemAvatar-root {
+  margin-right: 16px;
+}
+
+.history-list-item .MuiListItemText-primary {
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 32px;
+  text-align: center;
+  background-color: #fafafa;
+  border: 2px dashed #e0e0e0;
+  border-radius: 8px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .video-session-manager {
+    padding: 16px;
+  }
+
+  .session-manager-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .session-manager-header button {
+    width: 100%;
+  }
+
+  .session-card-content {
+    flex-direction: column;
+  }
+
+  .session-thumbnail {
+    width: 100%;
+    height: 180px;
+  }
+
+  .session-meta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Scrollbar styling */
+.session-manager-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.session-manager-content::-webkit-scrollbar-track {
+  background: #f5f5f5;
+}
+
+.session-manager-content::-webkit-scrollbar-thumb {
+  background: #bdbdbd;
+  border-radius: 4px;
+}
+
+.session-manager-content::-webkit-scrollbar-thumb:hover {
+  background: #9e9e9e;
+}

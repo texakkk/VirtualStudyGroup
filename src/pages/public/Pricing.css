@@ -1,0 +1,161 @@
+/* src/pages/Pricing.css */
+.pricing-container {
+    text-align: center;
+    padding: 2rem;
+    background: #f4f4f4;
+  }
+  
+  .pricing-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .pricing-container p {
+    margin-bottom: 2rem;
+    color: #666;
+  }
+  
+  .pricing-plans {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .plan-card {
+    background: white;
+    padding: 2rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease;
+  }
+  
+  .plan-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .plan-card h2 {
+    background: #28334AFF;
+    color: white;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+  }
+  
+  .plan-card .price {
+    font-size: 2rem;
+    margin: 1rem 0;
+  }
+  
+  .plan-card ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .plan-card ul li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #ddd;
+    color: #333;
+  }
+  
+  .plan-card ul li:last-child {
+    border-bottom: none;
+  }
+  
+  .btn-select {
+    background: #FF6F61;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    margin-top: 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.3s ease;
+  }
+  
+  .btn-select:hover {
+    background: #D7263D;
+  }
+  
+  .premium {
+    border: 2px solid #FF6F61;
+  }
+  
+  /* Responsive Design Adjustments */
+  @media (max-width: 768px) {
+    .pricing-container {
+      padding: 1rem;
+    }
+  
+    .pricing-container h1 {
+      font-size: 2rem;
+    }
+  
+    .pricing-container p {
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+    }
+  
+    .pricing-plans {
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+  
+    .plan-card {
+      width: 90%; /* Make the plan cards larger and more readable */
+      margin: 0.5rem 0;
+    }
+  
+    .btn-select {
+      padding: 0.75rem 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .pricing-container {
+      padding: 1rem 0.5rem;
+    }
+  
+    .pricing-container h1 {
+      font-size: 1.8rem;
+    }
+  
+    .pricing-container p {
+      font-size: 0.9rem;
+    }
+  
+    .pricing-plans {
+      width: 100%;
+    }
+  
+    .plan-card {
+      width: 100%; /* Make cards full width on small screens */
+      margin: 0.5rem auto;
+      padding: 1.5rem 1rem;
+    }
+  
+    .plan-card h2 {
+      font-size: 1.5rem;
+    }
+  
+    .plan-card .price {
+      font-size: 1.8rem;
+      margin: 0.75rem 0;
+    }
+  
+    .plan-card ul li {
+      padding: 0.5rem 0;
+      font-size: 0.9rem;
+    }
+  
+    .btn-select {
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+    }
+  }
+  

@@ -1,0 +1,51 @@
+.whiteboard-manager {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.whiteboard-manager .ant-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.whiteboard-manager .ant-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+}
+
+.whiteboard-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+}
+
+.whiteboard-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.active-users-count {
+  font-size: 14px;
+  color: #666;
+}
+
+.whiteboard-header-actions button {
+  padding: 4px 12px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.whiteboard-header-actions button:hover {
+  border-color: #40a9ff;
+  color: #40a9ff;
+}

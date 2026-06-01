@@ -1,0 +1,22 @@
+.user-presence-indicator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-count-text {
+  font-size: 13px;
+  color: #666;
+  white-space: nowrap;
+}
+
+.user-presence-indicator .ant-avatar {
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.user-presence-indicator .ant-avatar:hover {
+  transform: scale(1.1);
+  transition: transform 0.2s ease;
+}

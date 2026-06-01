@@ -1,0 +1,23 @@
+.document-sharing-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.public-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background: #f5f5f5;
+  border-radius: 4px;
+}
+
+.add-collaborator-section {
+  padding-top: 8px;
+}
+
+.collaborators-list h4 {
+  margin-bottom: 12px;
+  font-weight: 600;
+}

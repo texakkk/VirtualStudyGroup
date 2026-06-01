@@ -1,0 +1,69 @@
+.skip-links {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  padding: 0.75rem 1.5rem;
+  background-color: #000;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 0 0 4px 0;
+  transition: left 0.2s ease-in-out;
+  z-index: 10001;
+}
+
+.skip-link:focus {
+  left: 0;
+  outline: 3px solid #4CAF50;
+  outline-offset: 2px;
+}
+
+.skip-link:hover {
+  background-color: #333;
+}
+
+/* High contrast mode */
+.high-contrast .skip-link {
+  background-color: #000;
+  color: #ffff00;
+  border: 2px solid #ffff00;
+}
+
+.high-contrast .skip-link:focus {
+  outline: 3px solid #ffff00;
+}
+
+/* Reduced motion */
+.reduced-motion .skip-link {
+  transition: none;
+}
+
+/* Screen reader only class */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.sr-only-focusable:focus,
+.sr-only-focusable:active {
+  position: static;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}

@@ -1,0 +1,415 @@
+/* Notes Integration Styles */
+.notes-integration {
+  padding: 88px 0 32px;
+  margin: 0;
+  color: #1f2933;
+}
+
+.notes-group-selector {
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 16px;
+  margin-bottom: 24px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.notes-group-selector h6 {
+  margin-bottom: 12px;
+  color: #0f172a;
+  font-weight: 600;
+}
+
+.notes-group-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.notes-group-button {
+  padding: 6px 16px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+
+.notes-group-button:hover {
+  background: #f8fafc;
+  border-color: #94a3b8;
+}
+
+.notes-group-button.active {
+  background: #e8f1ff !important;
+  color: #0f172a !important;
+  border-color: #b8d4ff !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.12);
+}
+
+.notes-tabs {
+  background: #ffffff;
+  margin-bottom: 24px;
+}
+
+.notes-tabs .MuiTab-root {
+  min-height: 48px;
+  padding: 12px 24px;
+  color: #6b7280;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.notes-tabs .Mui-selected {
+  color: #1976d2 !important;
+}
+
+.notes-dashboard {
+  width: 100%;
+  max-width: 100%;
+  padding: 8px 24px 0;
+  box-sizing: border-box;
+}
+
+.notes-dashboard .MuiTypography-h4 {
+  color: #202124;
+  font-size: 2.25rem;
+  line-height: 1.15;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.notes-dashboard .MuiTypography-subtitle1 {
+  margin-top: 8px;
+  color: #6b7280;
+  font-size: 1.05rem;
+}
+
+.notes-filters {
+  border: 1px solid #eef2f7;
+  border-radius: 6px !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.16) !important;
+}
+
+.notes-filters .MuiOutlinedInput-root {
+  border-radius: 4px;
+  background: #ffffff;
+}
+
+.notes-card {
+  height: 220px !important;
+  min-height: 220px;
+  border: 1px solid #edf2f7;
+  border-radius: 8px !important;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.06) !important;
+  overflow: hidden;
+}
+
+.notes-card:hover {
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12) !important;
+}
+
+.notes-card .MuiCardContent-root {
+  padding: 16px 16px 10px !important;
+}
+
+.notes-card .MuiTypography-h6 {
+  color: #252525;
+  font-size: 1.15rem;
+  line-height: 1.25;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.notes-card .MuiIconButton-root {
+  color: #707070;
+  margin-top: -6px;
+  margin-right: -6px;
+}
+
+.notes-card .MuiTypography-body2 {
+  color: #b2b2b2;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.notes-card .MuiCardActions-root {
+  margin-top: auto;
+  min-height: 48px;
+  padding: 0 16px 14px !important;
+}
+
+.notes-card .MuiSvgIcon-fontSizeSmall {
+  color: #737373;
+  font-size: 1.1rem;
+}
+
+.notes-card .MuiTypography-caption {
+  color: #6f6f6f;
+  font-size: 0.82rem;
+  line-height: 1.3;
+}
+
+.notes-dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.notes-dashboard-title {
+  flex: 1;
+}
+
+.notes-dashboard-title h4 {
+  margin: 0 0 4px 0;
+  color: #0f172a;
+}
+
+.notes-dashboard-subtitle {
+  color: #64748b;
+  font-size: 16px;
+  margin: 0;
+}
+
+.notes-fab {
+  position: fixed !important;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .notes-group-buttons {
+    flex-direction: column;
+  }
+  
+  .notes-group-button {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .notes-dashboard-header {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .notes-fab {
+    bottom: 80px; /* Account for mobile navigation */
+  }
+}
+
+/* Integration with dashboard styles */
+.dashboard-container .notes-integration {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.dashboard-container .notes-integration .MuiContainer-root {
+  max-width: none;
+  padding: 0;
+}
+
+/* ============================================
+   MOBILE-RESPONSIVE OPTIMIZATIONS - Task 19.1
+   ============================================ */
+
+/* Mobile-first responsive layout */
+@media (max-width: 767px) {
+  .notes-integration {
+    padding: 72px 12px 88px;
+  }
+
+  .notes-group-selector {
+    padding: 12px;
+    margin-bottom: 16px;
+  }
+
+  .notes-group-selector h6 {
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+  }
+
+  .notes-group-buttons {
+    gap: 6px;
+  }
+
+  .notes-group-button {
+    padding: 10px 14px;
+    font-size: 15px;
+    min-height: 44px; /* Touch-friendly */
+  }
+
+  .notes-dashboard-header {
+    margin-bottom: 16px;
+  }
+
+  .notes-tabs {
+    margin-bottom: 16px;
+    overflow-x: auto;
+  }
+
+  .notes-tabs .MuiTab-root {
+    min-width: max-content;
+    padding: 10px 14px;
+  }
+
+  .notes-dashboard {
+    padding: 0;
+  }
+
+  .notes-dashboard .MuiTypography-h4 {
+    font-size: 1.85rem;
+  }
+
+  .notes-dashboard-title h4 {
+    font-size: 1.25rem;
+  }
+
+  .notes-dashboard-subtitle {
+    font-size: 14px;
+  }
+
+  /* Mobile tabs */
+  .MuiTabs-root {
+    min-height: 44px;
+  }
+
+  .MuiTab-root {
+    min-height: 44px;
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+
+  /* Mobile FAB positioning */
+  .notes-fab {
+    bottom: 16px;
+    right: 16px;
+    width: 56px !important;
+    height: 56px !important;
+  }
+
+  /* Mobile note cards */
+  .note-card-mobile {
+    margin-bottom: 12px;
+    border-radius: 8px;
+  }
+
+  /* Mobile editor */
+  .note-editor-mobile {
+    padding: 0;
+  }
+
+  .note-editor-mobile .MuiDialogContent-root {
+    padding: 12px;
+  }
+
+  .note-editor-mobile .MuiDialogActions-root {
+    padding: 12px;
+    gap: 8px;
+  }
+
+  /* Touch-friendly buttons */
+  .notes-integration button {
+    min-height: 44px;
+    padding: 10px 16px;
+  }
+
+  /* Mobile search */
+  .notes-search-mobile {
+    width: 100%;
+    margin-bottom: 12px;
+  }
+
+  .notes-search-mobile input {
+    font-size: 16px; /* Prevents zoom on iOS */
+    padding: 12px;
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .notes-integration {
+    padding: 88px 16px 32px;
+  }
+
+  .notes-group-buttons {
+    gap: 8px;
+  }
+
+  .notes-group-button {
+    padding: 8px 16px;
+    min-height: 44px;
+  }
+
+  .notes-fab {
+    bottom: 20px;
+    right: 20px;
+  }
+}
+
+/* Landscape mobile optimizations */
+@media (max-width: 767px) and (orientation: landscape) {
+  .notes-integration {
+    padding: 60px 8px 72px;
+  }
+
+  .notes-group-selector {
+    padding: 8px;
+    margin-bottom: 12px;
+  }
+
+  .notes-dashboard-header {
+    margin-bottom: 12px;
+  }
+
+  .notes-fab {
+    bottom: 12px;
+    right: 12px;
+    width: 48px !important;
+    height: 48px !important;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .notes-group-button {
+    min-height: 48px; /* Comfortable touch target */
+  }
+
+  .notes-group-button:active {
+    transform: scale(0.98);
+    background: #f1f5f9;
+  }
+
+  .notes-group-button.active:active {
+    background: #cbd5e1;
+  }
+
+  /* Remove hover effects on touch devices */
+  .notes-group-button:hover {
+    background: #ffffff;
+    border-color: #cbd5e1;
+  }
+
+  .notes-group-button.active:hover {
+    background: #e2e8f0;
+    border-color: #94a3b8;
+  }
+}
+
+/* Safe area insets for notched devices */
+@supports (padding: max(0px)) {
+  .notes-integration {
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
+  }
+
+  .notes-fab {
+    bottom: max(16px, env(safe-area-inset-bottom));
+    right: max(16px, env(safe-area-inset-right));
+  }
+}

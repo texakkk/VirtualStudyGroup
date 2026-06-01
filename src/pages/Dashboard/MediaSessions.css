@@ -1,0 +1,11 @@
+.media-sessions-container {
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .media-sessions-container {
+    padding: 10px;
+  }
+}
