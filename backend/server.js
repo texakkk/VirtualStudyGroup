@@ -270,12 +270,12 @@ const deviceSyncService = require('./services/deviceSyncService');
 mongoose.connection.once('open', async () => {
   console.log('📊 Database connected, initializing services...');
   
-  // Initialize Redis
-  try {
-    await initializeRedis();
-  } catch (error) {
+  // Initialize Redis (non-blocking, fire-and-forget)
+  // This allows the server to start even if Redis is unavailable
+  initializeRedis().catch(error => {
     console.error('❌ Failed to initialize Redis:', error.message);
-  }
+    console.log('⚠️  Server will continue without Redis caching and rate limiting');
+  })
   
   // Initialize localization service
   try {

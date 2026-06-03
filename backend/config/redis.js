@@ -8,27 +8,42 @@ let isConnected = false;
  * Initialize Redis client with connection handling
  */
 const initializeRedis = async () => {
+  // Skip Redis if explicitly disabled
+  if (process.env.REDIS_URL === 'disabled' || process.env.REDIS_URL === 'false') {
+    console.log('⚠️  Redis: Disabled via REDIS_URL environment variable');
+    return null;
+  }
+
   try {
+    // Skip Redis if no URL configured and not in development
+    const redisUrl = process.env.REDIS_URL || 'redis://localhost:6379';
+    if (!process.env.REDIS_URL && process.env.NODE_ENV !== 'development' && process.env.NODE_ENV !== 'test') {
+      console.log('⚠️  Redis: Not configured for this environment (set REDIS_URL to enable)');
+      return null;
+    }
+
     // Create Redis client
     redisClient = redis.createClient({
-      url: process.env.REDIS_URL || 'redis://localhost:6379',
+      url: redisUrl,
       socket: {
         reconnectStrategy: (retries) => {
-          if (retries > 10) {
-            console.error('❌ Redis: Max reconnection attempts reached');
+          // On Render/production, fail fast if Redis isn't available
+          const maxRetries = process.env.REDIS_MAX_RETRIES || 2;
+          if (retries > maxRetries) {
+            console.error('❌ Redis: Max reconnection attempts reached. Application will continue without caching.');
             return new Error('Max reconnection attempts reached');
           }
-          // Exponential backoff: 50ms, 100ms, 200ms, etc.
-          return Math.min(retries * 50, 3000);
+          // Exponential backoff: 50ms, 100ms, 150ms
+          return Math.min(retries * 50, 500);
         },
-        connectTimeout: 10000,
+        connectTimeout: 3000,
         keepAlive: 30000,
         noDelay: true
       },
       // Disable offline queue to fail fast
       enableOfflineQueue: false,
       // Connection pool settings
-      maxRetriesPerRequest: 3
+      maxRetriesPerRequest: 1
     });
 
     // Event handlers
