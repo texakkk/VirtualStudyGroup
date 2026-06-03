@@ -18,6 +18,7 @@ import {
   FaSignOutAlt,
 } from "react-icons/fa";
 import api from "../../api";
+import { getSocketUrl } from "../../config/socketConfig";
 import { ensureStringId } from "../../utils/objectId";
 import "./VideoChat.css";
 
@@ -209,7 +210,7 @@ const VideoChat = ({ groupId, onLeave }) => {
         token ? "Token found" : "No token"
       );
 
-      socketRef.current = io.connect("http://localhost:5001/video", {
+      socketRef.current = io.connect(getSocketUrl("video"), {
         auth: {
           token: token,
         },

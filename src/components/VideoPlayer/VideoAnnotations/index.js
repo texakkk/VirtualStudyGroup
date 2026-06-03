@@ -9,6 +9,7 @@ import {
 } from '@mui/icons-material';
 import { io } from 'socket.io-client';
 import api from '../../../api';
+import { getSocketUrl } from '../../../config/socketConfig';
 import AnnotationOverlay from './AnnotationOverlay';
 import AnnotationCreationTools from './AnnotationCreationTools';
 import AnnotationTimeline from './AnnotationTimeline';
@@ -131,9 +132,8 @@ const VideoAnnotations = ({
   // Initialize socket connection for real-time updates
   useEffect(() => {
     const token = localStorage.getItem('token');
-    const socketUrl = process.env.REACT_APP_SOCKET_URL || 'http://localhost:5001';
 
-    socketRef.current = io(`${socketUrl}/media-sessions`, {
+    socketRef.current = io(getSocketUrl('media-sessions'), {
       auth: { token },
       transports: ['websocket', 'polling'],
     });

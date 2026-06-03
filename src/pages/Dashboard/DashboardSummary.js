@@ -28,6 +28,7 @@ import {
 } from "@mui/icons-material";
 import io from "socket.io-client";
 import api from "../../api";
+import { getSocketUrl } from "../../config/socketConfig";
 import NotificationSummary from "../../components/notifications/NotificationSummary";
 import { useNotification } from "../../contexts/NotificationContext";
 
@@ -102,7 +103,7 @@ const DashboardSummary = () => {
 
     // Set up socket connection for real-time updates using chat namespace
     const token = localStorage.getItem("token");
-    socketRef.current = io("http://localhost:5001/chat", {
+    socketRef.current = io(getSocketUrl("chat"), {
       auth: { token },
       transports: ["websocket", "polling"],
       timeout: 20000,

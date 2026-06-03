@@ -13,6 +13,7 @@ import { BsCheck2All } from "react-icons/bs";
 import io from "socket.io-client";
 import EmojiPicker from "emoji-picker-react";
 import api from "../../api";
+import { getSocketUrl } from "../../config/socketConfig";
 import { useNotification } from "../../contexts/NotificationContext";
 import { useToast } from "../../contexts/ToastContext";
 import { ensureStringId } from "../../utils/objectId";
@@ -387,7 +388,7 @@ const Chat = ({ groupId, onTyping, socket }) => {
     } else {
       // Connect to chat namespace with authentication
       const token = localStorage.getItem("token");
-      socketRef.current = io.connect("http://localhost:5001/chat", {
+      socketRef.current = io.connect(getSocketUrl("chat"), {
         auth: {
           token: token,
         },

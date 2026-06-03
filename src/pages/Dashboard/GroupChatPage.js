@@ -12,6 +12,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import io from "socket.io-client";
 import Chat from "./Chat";
 import api from "../../api";
+import { getSocketUrl } from "../../config/socketConfig";
 import { useVideoChat } from "../../contexts/VideoChatContext";
 import { subscribeToGroupsUpdated } from "../../utils/groupEvents";
 import "./GroupChatPage.css";
@@ -143,7 +144,7 @@ const GroupChatPage = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
 
-    socketRef.current = io("http://localhost:5001/chat", {
+    socketRef.current = io(getSocketUrl("chat"), {
       auth: {
         token: token,
       },

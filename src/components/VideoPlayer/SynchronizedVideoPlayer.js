@@ -39,6 +39,7 @@ import {
 } from '@mui/icons-material';
 import api from '../../api';
 import { ensureStringId } from '../../utils/objectId';
+import { getSocketUrl } from '../../config/socketConfig';
 import VideoAnnotations from './VideoAnnotations';
 import './SynchronizedVideoPlayer.css';
 
@@ -128,9 +129,8 @@ const SynchronizedVideoPlayer = ({
   // Initialize socket connection
   useEffect(() => {
     const token = localStorage.getItem('token');
-    const socketUrl = process.env.REACT_APP_SOCKET_URL || 'http://localhost:5001';
 
-    socketRef.current = io(`${socketUrl}/media-sessions`, {
+    socketRef.current = io(getSocketUrl('media-sessions'), {
       auth: { token },
       transports: ['websocket', 'polling'],
     });
