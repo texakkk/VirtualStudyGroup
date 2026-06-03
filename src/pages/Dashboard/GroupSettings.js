@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import api from '../../api';
 import './GroupSettings.css';
 
@@ -99,7 +99,7 @@ const GroupSettings = ({ groupId, onClose }) => {
     }
   });
 
-  const fetchGroupSettings = async () => {
+  const fetchGroupSettings = useCallback(async () => {
     try {
       const token = localStorage.getItem('token');
       const response = await api.get(`/group/${groupId}/settings`, {
@@ -117,9 +117,9 @@ const GroupSettings = ({ groupId, onClose }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [groupId]);
 
-  const fetchSubGroups = async () => {
+  const fetchSubGroups = useCallback(async () => {
     try {
       const token = localStorage.getItem('token');
       const response = await api.get(`/group/${groupId}/subgroups`, {
@@ -132,9 +132,9 @@ const GroupSettings = ({ groupId, onClose }) => {
     } catch (error) {
       console.error('Failed to load sub-groups:', error);
     }
-  };
+  }, [groupId]);
 
-  const fetchRoles = async () => {
+  const fetchRoles = useCallback(async () => {
     try {
       const token = localStorage.getItem('token');
       const response = await api.get(`/group/${groupId}/roles`, {
@@ -148,7 +148,18 @@ const GroupSettings = ({ groupId, onClose }) => {
       console.error('Failed to load roles:', error);
       // Roles might not be implemented yet, so don't show error
     }
-  };
+  }, [groupId]);
+
+  useEffect(() => {
+    if (!groupId) {
+      setLoading(false);
+      return;
+    }
+
+    fetchGroupSettings();
+    fetchSubGroups();
+    fetchRoles();
+  }, [groupId, fetchGroupSettings, fetchSubGroups, fetchRoles]);
 
   const handleSaveSettings = async () => {
     setSaving(true);

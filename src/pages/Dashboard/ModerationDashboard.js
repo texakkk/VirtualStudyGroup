@@ -3,6 +3,17 @@ import React, { useState, useEffect, useCallback } from 'react';
 import api from '../../api';
 import './ModerationDashboard.css';
 
+const defaultModerationSettings = {
+  autoModeration: false,
+  bannedWords: [],
+  reportThreshold: 3,
+  requireApproval: {
+    newMembers: false,
+    fileUploads: false,
+    posts: false
+  }
+};
+
 const ModerationDashboard = ({ groupId, onClose }) => {
   const [reports, setReports] = useState([]);
   const [stats, setStats] = useState(null);
@@ -11,17 +22,6 @@ const ModerationDashboard = ({ groupId, onClose }) => {
   const [filterStatus, setFilterStatus] = useState('pending');
   const [moderationSettings, setModerationSettings] = useState(null);
   const [showSettings, setShowSettings] = useState(false);
-
-  const defaultModerationSettings = {
-    autoModeration: false,
-    bannedWords: [],
-    reportThreshold: 3,
-    requireApproval: {
-      newMembers: false,
-      fileUploads: false,
-      posts: false
-    }
-  };
 
   const fetchReports = useCallback(async () => {
     try {
@@ -80,7 +80,7 @@ const ModerationDashboard = ({ groupId, onClose }) => {
       console.error('Failed to load moderation settings:', error);
       setModerationSettings(defaultModerationSettings);
     }
-  }, [groupId, defaultModerationSettings]);
+  }, [groupId]);
 
   useEffect(() => {
     const loadData = async () => {

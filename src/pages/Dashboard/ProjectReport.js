@@ -17,14 +17,21 @@ import {
 import api from "../../api";
 import { format, subDays, isValid } from "date-fns";
 
+const removeControlCharacters = (value) =>
+  Array.from(value)
+    .filter((char) => {
+      const code = char.charCodeAt(0);
+      return code > 31 && (code < 127 || code > 159);
+    })
+    .join("");
+
 // Text sanitization utilities
 const sanitizeText = (text) => {
   if (!text || typeof text !== "string") return "";
 
   return (
-    text
+    removeControlCharacters(text)
       // Remove or replace problematic characters
-      .replace(/[\u0000-\u001F\u007F-\u009F]/g, "") // Remove control characters
       .replace(/[\u2000-\u206F\u2E00-\u2E7F\u3000-\u303F]/g, " ") // Replace special spaces and punctuation
       .replace(/[\uD800-\uDFFF]/g, "?") // Replace unpaired surrogates
       // Handle common emojis and symbols
