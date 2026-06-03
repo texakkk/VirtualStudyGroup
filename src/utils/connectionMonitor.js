@@ -3,14 +3,14 @@
  * Monitors backend connectivity and handles reconnection
  */
 
+import { getApiBaseUrl } from '../config/apiConfig';
+
 class ConnectionMonitor {
   constructor() {
     this.isOnline = true;
     this.checkInterval = null;
     this.listeners = [];
-    this.healthCheckUrl = process.env.REACT_APP_API_URL 
-      ? `${process.env.REACT_APP_API_URL.replace('/api', '')}/api/health`
-      : 'http://localhost:5001/api/health';
+    this.healthCheckUrl = `${getApiBaseUrl()}/health`;
   }
 
   /**

@@ -9,6 +9,7 @@ import VersionHistory from './VersionHistory';
 import { notesApi, transformNoteData } from '../../services/notesApi';
 import { handleApiError, validateNoteData } from '../../utils/apiErrorHandler';
 import { ensureStringId } from '../../utils/objectId';
+import { getApiBaseUrl } from '../../config/apiConfig';
 import AuthContext from '../../contexts/AuthContext';
 import './NotesIntegration.css';
 
@@ -122,7 +123,7 @@ const NotesManager = ({ groupId = null }) => {
   const loadUserGroups = useCallback(async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:5001/api'}/group/user-groups`, {
+      const response = await fetch(`${getApiBaseUrl()}/group/user-groups`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       
@@ -173,7 +174,7 @@ const NotesManager = ({ groupId = null }) => {
   const loadGroupMembers = useCallback(async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:5001/api'}/group/${currentGroupId}/members`, {
+      const response = await fetch(`${getApiBaseUrl()}/group/${currentGroupId}/members`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getApiBaseUrl } from './config/apiConfig';
 
 // Helper function to recursively convert ObjectIds to strings
 const convertObjectIdsToStrings = (obj) => {
@@ -60,7 +61,7 @@ const convertObjectIdsToStrings = (obj) => {
 };
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5001/api',
+  baseURL: getApiBaseUrl(),
   timeout: 60000, // 60 second timeout for requests
   headers: { 
     'Content-Type': 'application/json',
@@ -146,7 +147,7 @@ api.interceptors.response.use(
       try {
         // Attempt to refresh the token
         const response = await axios.post(
-          `${process.env.REACT_APP_API_URL || 'http://localhost:5001/api'}/auth/refresh`,
+          `${getApiBaseUrl()}/auth/refresh`,
           { refreshToken }
         );
 

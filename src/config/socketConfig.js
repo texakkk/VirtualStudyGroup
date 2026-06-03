@@ -1,3 +1,5 @@
+import { getSocketBaseUrl } from './apiConfig';
+
 // Centralized Socket.IO configuration with aggressive keep-alive settings
 export const socketConfig = {
   reconnection: true,
@@ -23,6 +25,6 @@ export const socketConfig = {
 };
 
 export const getSocketUrl = (namespace = '') => {
-  const baseUrl = process.env.REACT_APP_SOCKET_URL || 'http://localhost:5001';
+  const baseUrl = getSocketBaseUrl();
   return namespace ? `${baseUrl}/${namespace}` : baseUrl;
 };
