@@ -22,7 +22,8 @@ const { initializeRedis, closeRedis } = require('./config/redis');
 
 const allowedOrigins = [
   process.env.CLIENT_URL || "http://localhost:3000",
-  process.env.PRODUCTION_CLIENT_URL || "https://virtual-study-group-hazel.vercel.app"
+  process.env.PRODUCTION_CLIENT_URL || "https://virtual-study-group-xi.vercel.app",
+  "https://virtual-study-group-hazel.vercel.app" // legacy domain
 ].filter(Boolean);
 
 // Create Express and HTTP server
