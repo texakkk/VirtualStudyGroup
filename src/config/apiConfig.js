@@ -1,7 +1,12 @@
+const isLocalhost = () => {
+  const host = typeof window !== 'undefined' ? window.location.hostname : 'localhost';
+  return host === 'localhost' || host === '127.0.0.1';
+};
+
 const DEFAULT_BACKEND_URL =
-  process.env.NODE_ENV === 'production'
-    ? 'https://virtualstudygroup.onrender.com'
-    : 'http://localhost:5001';
+  isLocalhost()
+    ? 'http://localhost:5001'
+    : 'https://virtualstudygroup.onrender.com';
 
 const stripTrailingSlash = (value) => value.replace(/\/+$/, '');
 
