@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { getApiBaseUrl } from './config/apiConfig';
+import { isDashboardMutation, notifyDashboardDataChanged } from './utils/dashboardEvents';
 
 // Helper function to recursively convert ObjectIds to strings
 const convertObjectIdsToStrings = (obj) => {
@@ -109,7 +110,16 @@ api.interceptors.request.use((config) => {
 
 // Response interceptor to handle token expiration
 api.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    if (response.status >= 200 && response.status < 300 && isDashboardMutation(response.config)) {
+      notifyDashboardDataChanged({
+        method: response.config.method,
+        url: response.config.url,
+      });
+    }
+
+    return response;
+  },
   async (error) => {
     const originalRequest = error.config;
 

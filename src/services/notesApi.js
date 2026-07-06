@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { ensureStringId } from '../utils/objectId';
 import { getApiBaseUrl } from '../config/apiConfig';
+import { isDashboardMutation, notifyDashboardDataChanged } from '../utils/dashboardEvents';
 
 const API_BASE_URL = getApiBaseUrl();
 
@@ -23,7 +24,16 @@ api.interceptors.request.use((config) => {
 
 // Handle response errors
 api.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    if (response.status >= 200 && response.status < 300 && isDashboardMutation(response.config)) {
+      notifyDashboardDataChanged({
+        method: response.config.method,
+        url: response.config.url,
+      });
+    }
+
+    return response;
+  },
   (error) => {
     if (error.response?.status === 401) {
       // Token expired or invalid

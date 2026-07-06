@@ -1,18 +1,49 @@
 const MediaSession = require('../models/MediaSession');
 const GroupMember = require('../models/GroupMember');
+const User = require('../models/User');
+const jwt = require('jsonwebtoken');
+
+const isSessionParticipant = (mediaSession, userId) =>
+  mediaSession.MediaSession_participants.some((participant) => {
+    const participantId = participant?._id || participant;
+    return participantId.toString() === userId.toString();
+  });
 
 const setupMediaSessionSockets = (io) => {
   // Create a namespace for media sessions
   const mediaSessionNamespace = io.of('/media-sessions');
 
+  mediaSessionNamespace.use(async (socket, next) => {
+    try {
+      const token = socket.handshake?.auth?.token;
+      if (!token) {
+        return next(new Error('Authentication token required'));
+      }
+
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const user = await User.findById(decoded.user._id).select('User_name User_tokenVersion');
+      if (!user || decoded.user.tokenVersion !== user.User_tokenVersion) {
+        return next(new Error('Invalid session'));
+      }
+
+      socket.userId = user._id.toString();
+      socket.userName = user.User_name;
+      return next();
+    } catch (error) {
+      return next(new Error('Authentication failed'));
+    }
+  });
+
   mediaSessionNamespace.on('connection', (socket) => {
     console.log(`Media session socket connected: ${socket.id}`);
 
     // Join a media session room
-    socket.on('joinSession', async ({ sessionId, userId }) => {
+    socket.on('joinSession', async ({ sessionId }) => {
       try {
+        const userId = socket.userId;
+
         if (!sessionId || !userId) {
-          socket.emit('error', { message: 'Session ID and User ID are required' });
+          socket.emit('error', { message: 'Session ID and authenticated user are required' });
           return;
         }
 
@@ -27,9 +58,7 @@ const setupMediaSessionSockets = (io) => {
         }
 
         // Check if user is a participant
-        const isParticipant = mediaSession.MediaSession_participants.some(p => 
-          p._id.toString() === userId.toString()
-        );
+        const isParticipant = isSessionParticipant(mediaSession, userId);
 
         if (!isParticipant) {
           socket.emit('error', { message: 'You are not a participant in this session' });
@@ -101,7 +130,7 @@ const setupMediaSessionSockets = (io) => {
         }
 
         // Verify user is a participant
-        if (!mediaSession.MediaSession_participants.includes(socket.userId)) {
+        if (!isSessionParticipant(mediaSession, socket.userId)) {
           socket.emit('error', { message: 'You are not a participant in this session' });
           return;
         }
@@ -167,7 +196,7 @@ const setupMediaSessionSockets = (io) => {
         }
 
         // Verify user is a participant
-        if (!mediaSession.MediaSession_participants.includes(socket.userId)) {
+        if (!isSessionParticipant(mediaSession, socket.userId)) {
           socket.emit('error', { message: 'You are not a participant in this session' });
           return;
         }
@@ -379,7 +408,7 @@ const setupMediaSessionSockets = (io) => {
         }
 
         // Verify user is a participant
-        if (!mediaSession.MediaSession_participants.includes(socket.userId)) {
+        if (!isSessionParticipant(mediaSession, socket.userId)) {
           socket.emit('error', { message: 'You are not a participant in this session' });
           return;
         }

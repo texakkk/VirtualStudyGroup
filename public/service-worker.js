@@ -8,8 +8,6 @@ const API_CACHE = 'vstudy-api-v2';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
-  '/static/css/main.css',
-  '/static/js/main.js',
   '/manifest.json',
   '/logo192.png',
   '/logo512.png',

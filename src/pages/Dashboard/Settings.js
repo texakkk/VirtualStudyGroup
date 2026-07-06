@@ -19,6 +19,7 @@ import {
   useMediaQuery,
   IconButton,
   CircularProgress,
+  InputAdornment,
   List,
   ListItem,
   ListItemButton,
@@ -32,6 +33,8 @@ import LockIcon from "@mui/icons-material/Lock";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AccessibilityIcon from "@mui/icons-material/Accessibility";
 import SettingsIcon from "@mui/icons-material/Settings";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { FormControlLabel, Switch } from "@mui/material";
 import api from "../../api";
 
@@ -69,8 +72,35 @@ const Settings = () => {
   // State for account deletion
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [deletePassword, setDeletePassword] = useState("");
+  const [visiblePasswords, setVisiblePasswords] = useState({
+    currentPassword: false,
+    newPassword: false,
+    confirmPassword: false,
+    deletePassword: false,
+  });
   const [isLoading, setIsLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("appearance");
+
+  const togglePasswordVisibility = (fieldName) => {
+    setVisiblePasswords((current) => ({
+      ...current,
+      [fieldName]: !current[fieldName],
+    }));
+  };
+
+  const getPasswordInputProps = (fieldName) => ({
+    endAdornment: (
+      <InputAdornment position="end">
+        <IconButton
+          aria-label={visiblePasswords[fieldName] ? "Hide password" : "Show password"}
+          onClick={() => togglePasswordVisibility(fieldName)}
+          edge="end"
+        >
+          {visiblePasswords[fieldName] ? <VisibilityOffIcon /> : <VisibilityIcon />}
+        </IconButton>
+      </InputAdornment>
+    ),
+  });
 
   // Sync theme state with ThemeContext
   useEffect(() => {
@@ -270,8 +300,8 @@ const Settings = () => {
       return;
     }
 
-    if (passwordForm.newPassword.length < 6) {
-      enqueueSnackbar("Password must be at least 6 characters long", {
+    if (passwordForm.newPassword.length < 8) {
+      enqueueSnackbar("Password must be at least 8 characters long", {
         variant: "error",
       });
       return;
@@ -683,32 +713,37 @@ const Settings = () => {
                 fullWidth
                 margin="normal"
                 label="Current Password"
-                type="password"
+                type={visiblePasswords.currentPassword ? "text" : "password"}
                 name="currentPassword"
                 value={passwordForm.currentPassword}
                 onChange={handlePasswordChange}
                 required
+                InputProps={getPasswordInputProps("currentPassword")}
               />
               <TextField
                 fullWidth
                 margin="normal"
                 label="New Password"
-                type="password"
+                type={visiblePasswords.newPassword ? "text" : "password"}
                 name="newPassword"
                 value={passwordForm.newPassword}
                 onChange={handlePasswordChange}
                 required
-                helperText="Password must be at least 6 characters long"
+                helperText="Password must be at least 8 characters long"
+                inputProps={{ minLength: 8 }}
+                InputProps={getPasswordInputProps("newPassword")}
               />
               <TextField
                 fullWidth
                 margin="normal"
                 label="Confirm New Password"
-                type="password"
+                type={visiblePasswords.confirmPassword ? "text" : "password"}
                 name="confirmPassword"
                 value={passwordForm.confirmPassword}
                 onChange={handlePasswordChange}
                 required
+                inputProps={{ minLength: 8 }}
+                InputProps={getPasswordInputProps("confirmPassword")}
               />
 
               <Box mt={3} display="flex" justifyContent="flex-end">
@@ -866,12 +901,13 @@ const Settings = () => {
             autoFocus
             margin="dense"
             label="Password"
-            type="password"
+            type={visiblePasswords.deletePassword ? "text" : "password"}
             fullWidth
             variant="outlined"
             value={deletePassword}
             onChange={(e) => setDeletePassword(e.target.value)}
             sx={{ mt: 2 }}
+            InputProps={getPasswordInputProps("deletePassword")}
           />
         </DialogContent>
         <DialogActions>

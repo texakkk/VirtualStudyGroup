@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import api from '../../api';
 import { useParams, useNavigate } from 'react-router-dom';
 import './JoinGroup.css';
+import PasswordInput from '../../components/common/PasswordInput';
 
 const JoinGroup = () => {
   const { invitationToken } = useParams();
@@ -106,8 +107,7 @@ const JoinGroup = () => {
         </div>
         <div className="form-group">
           <label htmlFor="User_password">Password</label>
-          <input
-            type="password"
+          <PasswordInput
             id="User_password"
             value={User_password}
             onChange={(e) => setUser_password(e.target.value)}

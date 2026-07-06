@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { FaEnvelope, FaArrowLeft } from 'react-icons/fa';
 import api from '../../api';
 import './ForgotPassword.css';
 
@@ -8,22 +10,32 @@ const ForgotPassword = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const validateEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  const validateEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     setMessage('');
     setError('');
 
-    if (!validateEmail(email)) {
+    const normalizedEmail = email.trim();
+
+    if (!validateEmail(normalizedEmail)) {
       setError('Please enter a valid email address.');
       return;
     }
 
     try {
       setLoading(true);
-      const res = await api.post('/auth/forgot-password', { email });
-      setMessage(res.data.message);
+      const response = await api.post('/auth/forgot-password', {
+        User_email: normalizedEmail,
+      });
+
+      if (response.status >= 400 || response.data?.success === false) {
+        setError(response.data?.message || response.data?.details?.[0]?.error || 'Error sending reset link');
+        return;
+      }
+
+      setMessage(response.data?.message || 'Reset link sent. Please check your email.');
       setEmail('');
     } catch (err) {
       setError(err.response?.data?.message || 'Error sending reset link');
@@ -33,47 +45,52 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="forgot-password-container">
-      <div className="forgot-password-form">
-        <h1>Reset Password</h1>
-        <p className="form-subtitle">
+    <main className="forgot-page">
+      <section className="forgot-panel" aria-labelledby="forgot-password-title">
+        <Link to="/signin" className="forgot-back-link">
+          <FaArrowLeft aria-hidden="true" />
+          <span>Back to sign in</span>
+        </Link>
+
+        <div className="forgot-icon" aria-hidden="true">
+          <FaEnvelope />
+        </div>
+
+        <h1 id="forgot-password-title">Forgot Password</h1>
+        <p className="forgot-copy">
           Enter your account email and we will send you a reset link.
         </p>
 
-        <form onSubmit={handleSubmit} aria-live="polite">
-          <label htmlFor="email">Email Address</label>
-          <input
-            id="email"
-            type="email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            aria-required="true"
-            className={error ? 'input-error' : ''}
-            disabled={loading}
-          />
+        <form className="forgot-form" onSubmit={handleSubmit}>
+          <div className="forgot-field">
+            <label htmlFor="forgot-email">Email Address</label>
+            <input
+              id="forgot-email"
+              name="User_email"
+              type="email"
+              placeholder="you@example.com"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              autoComplete="email"
+              required
+              disabled={loading}
+              aria-invalid={Boolean(error)}
+            />
+          </div>
 
-          <button type="submit" className="btn-reset" disabled={loading}>
+          <button type="submit" className="forgot-submit" disabled={loading}>
             {loading ? 'Sending...' : 'Send Reset Link'}
           </button>
 
-          {message && <p className="success-message">{message}</p>}
+          {message && <p className="forgot-message success">{message}</p>}
           {error && (
-            <p className="error-message" aria-live="assertive">
+            <p className="forgot-message error" aria-live="assertive">
               {error}
             </p>
           )}
-
-          <p className="back-to-login">
-            Remember your password?{' '}
-            <a href="/signin" className="login-link">
-              Log in
-            </a>
-          </p>
         </form>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 };
 

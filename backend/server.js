@@ -20,9 +20,16 @@ const { initializeRedis, closeRedis } = require('./config/redis');
   }
 });
 
+const parseOrigins = (value) =>
+  (value || "")
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean);
+
 const allowedOrigins = [
-  process.env.CLIENT_URL || "http://localhost:3000",
-  process.env.PRODUCTION_CLIENT_URL || "https://virtual-study-group-xi.vercel.app",
+  ...parseOrigins(process.env.CLIENT_URL || "http://localhost:3000"),
+  ...parseOrigins(process.env.PRODUCTION_CLIENT_URL || "https://virtual-study-group-xi.vercel.app"),
+  ...parseOrigins(process.env.CORS_ORIGINS),
   "https://virtual-study-group-hazel.vercel.app" // legacy domain
 ].filter(Boolean);
 

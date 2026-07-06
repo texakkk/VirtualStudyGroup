@@ -161,9 +161,9 @@ function showUpdateNotification(registration) {
 
 export function unregister() {
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.ready
-      .then((registration) => {
-        registration.unregister();
+    navigator.serviceWorker.getRegistrations()
+      .then((registrations) => {
+        registrations.forEach((registration) => registration.unregister());
       })
       .catch((error) => {
         console.error(error.message);

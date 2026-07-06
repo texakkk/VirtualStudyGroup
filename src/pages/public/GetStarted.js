@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import api from '../../api'; // Ensure that api.js exports an Axios instance
 import './GetStarted.css';
+import PasswordInput from '../../components/common/PasswordInput';
 
 const GetStarted = () => {
   const [User_name, setName] = useState('');
@@ -11,12 +12,18 @@ const GetStarted = () => {
   const [error, setError] = useState(''); // State to handle error messages
   const [message, setMessage] = useState(''); // State to handle success messages
   const navigate = useNavigate(); // Use navigate for redirection
+  const passwordMinLength = 8;
 
   // Handle Sign Up form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(''); // Reset any previous error
     setMessage(''); // Reset any previous success message
+
+    if (User_password.length < passwordMinLength) {
+      setError(`Password must be at least ${passwordMinLength} characters`);
+      return;
+    }
 
     // Validate password and confirmPassword match
     if (User_password !== confirmPassword) {
@@ -27,6 +34,10 @@ const GetStarted = () => {
     try {
       // Use the api instance for the POST request
       const res = await api.post('/auth/register', { User_name, User_email, User_password });
+      if (res.status >= 400 || res.data?.success === false) {
+        setError(res.data?.message || res.data?.details?.[0]?.error || 'Error creating account');
+        return;
+      }
 
       // Set success message
       setMessage(res.data.message);
@@ -93,18 +104,18 @@ const GetStarted = () => {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <input
-            type="password"
-            placeholder="Password"
+          <PasswordInput
+            placeholder="Password (min 8 characters)"
             value={User_password}
             onChange={(e) => setPassword(e.target.value)}
+            minLength={passwordMinLength}
             required
           />
-          <input
-            type="password"  // Corrected the input type
+          <PasswordInput
             placeholder="Confirm Password"
             value={confirmPassword} // Separate state for confirm password
             onChange={(e) => setConfirmPassword(e.target.value)} // Use confirmPassword state
+            minLength={passwordMinLength}
             required
           />
           <button type="submit" className="btn-getstarted">Create Account</button>

@@ -18,7 +18,7 @@ import {
   FaSignOutAlt,
 } from "react-icons/fa";
 import api from "../../api";
-import { getSocketUrl } from "../../config/socketConfig";
+import { getSocketUrl, socketConfig } from "../../config/socketConfig";
 import { ensureStringId } from "../../utils/objectId";
 import "./VideoChat.css";
 
@@ -211,12 +211,14 @@ const VideoChat = ({ groupId, onLeave }) => {
       );
 
       socketRef.current = io.connect(getSocketUrl("video"), {
+        ...socketConfig,
         auth: {
           token: token,
         },
-        transports: ["websocket", "polling"], // Allow fallback to polling
-        timeout: 20000, // 20 second timeout
         forceNew: true, // Force new connection
+      });
+      socketRef.current.io.on("reconnect_attempt", () => {
+        socketRef.current.auth = { token: localStorage.getItem("token") };
       });
 
       // Handle connection errors

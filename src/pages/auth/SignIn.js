@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import api from '../../api';
 import './SignIn.css';
 import { useAuth } from '../../contexts/AuthContext';
+import PasswordInput from '../../components/common/PasswordInput';
 
 const SignIn = () => {
   const { setIsAuthenticated, setCurrentUser } = useAuth();
@@ -28,8 +29,8 @@ const SignIn = () => {
     if (!/\S+@\S+\.\S+/.test(User_email)) {
       return setError('Please enter a valid email address.');
     }
-    if (User_password.length < 6) {
-      return setError('Password must be at least 6 characters.');
+    if (User_password.length < 8) {
+      return setError('Password must be at least 8 characters.');
     }
 
     setLoading(true);
@@ -128,12 +129,12 @@ const SignIn = () => {
                 required
               />
               <label htmlFor="password">Password</label>
-              <input
+              <PasswordInput
                 id="password"
-                type="password"
                 placeholder="Enter your password"
                 value={User_password}
                 onChange={(e) => setPassword(e.target.value)}
+                minLength={8}
                 required
               />
               <button type="submit" className="btn-signin" disabled={loading}>

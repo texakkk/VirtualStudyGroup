@@ -136,11 +136,12 @@ class AIService {
 
       // Validate API key
       if (!this.apiKey) {
-        if (process.env.NODE_ENV !== 'production') {
-          return this._makeLocalRequest(prompt, options, startTime);
-        }
-
-        throw new Error('AI API key not configured');
+        return this._makeLocalRequest(
+          prompt,
+          options,
+          startTime,
+          new Error('AI API key not configured')
+        );
       }
 
       const cooldownSeconds = this._getRateLimitCooldownSeconds();
@@ -156,19 +157,7 @@ class AIService {
     } catch (error) {
       console.error('AI Service Error:', error.message);
 
-      if (process.env.NODE_ENV !== 'production') {
-        return this._makeLocalRequest(prompt, options, startTime, error);
-      }
-      
-      // Return fallback response for graceful degradation
-      return {
-        content: this._getFallbackResponse(options.type, error),
-        model: 'fallback',
-        tokensUsed: 0,
-        responseTime: Date.now() - startTime,
-        confidence: 0.1,
-        error: error.message,
-      };
+      return this._makeLocalRequest(prompt, options, startTime, error);
     }
   }
 

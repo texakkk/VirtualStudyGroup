@@ -2,7 +2,6 @@
 .getstarted-container {
   min-height: 100vh;
   padding: 2rem 1rem;
-  background: #f8f9fa;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
@@ -95,26 +94,37 @@
   }
   
   .btn-getstarted {
-    background-color: #28334AFF;
-    color: white;
-    padding: 1rem 1.5rem;
-    border: none;
-    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0f172a;
+    color: #ffffff;
+    min-height: 46px;
+    padding: 0.85rem 1.5rem;
+    border: 1px solid #0f172a;
+    border-radius: 7px;
     cursor: pointer;
     width: 100%;
     margin: 1.5rem 0;
     font-size: 1rem;
-    font-weight: 600;
-    transition: background-color 0.2s, transform 0.1s;
+    font-weight: 800;
+    transition: background-color 0.2s, border-color 0.2s, transform 0.1s;
   }
   
-  .btn-getstarted:hover {
-    background-color: #1e2a4a;
+  .btn-getstarted:hover:not(:disabled) {
+    background-color: #1e293b;
+    border-color: #1e293b;
     transform: translateY(-1px);
   }
   
   .btn-getstarted:active {
     transform: translateY(0);
+  }
+
+  .btn-getstarted:disabled {
+    background-color: #94a3b8;
+    border-color: #94a3b8;
+    cursor: not-allowed;
   }
   
   .terms-text {

@@ -66,7 +66,7 @@ router.post('/register',
   validateRequestBody({
     User_name: { type: 'text', required: true, minLength: 2, maxLength: 50 },
     User_email: { type: 'email', required: true },
-    User_password: { type: 'text', required: true, minLength: 6, maxLength: 100 }
+    User_password: { type: 'text', required: true, minLength: 8, maxLength: 100 }
   }),
   async (req, res) => {
   const { User_name, User_email, User_password } = req.body;
@@ -328,7 +328,11 @@ router.post('/forgot-password',
 
 // @route PUT /api/auth/reset-password/:token
 // @desc Reset the user's password using the reset token
-router.put('/reset-password/:token', async (req, res) => {
+router.put('/reset-password/:token',
+  validateRequestBody({
+    User_password: { type: 'text', required: true, minLength: 8, maxLength: 100 }
+  }),
+  async (req, res) => {
   const { User_password } = req.body;
   const resetToken = req.params.token;
 
@@ -342,8 +346,7 @@ router.put('/reset-password/:token', async (req, res) => {
 
     if (!user) return res.status(400).json({ message: 'Invalid or expired reset token' });
 
-    const salt = await bcrypt.genSalt(10);
-    user.User_password = await bcrypt.hash(User_password, salt);
+    user.User_password = User_password;
     user.User_resetPasswordToken = undefined;
     user.User_resetPasswordExpire = undefined;
 

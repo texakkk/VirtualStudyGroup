@@ -16,7 +16,6 @@ const {
 } = require("../middleware/authMiddleware");
 const { normalizeObjectIdParams } = require("../middleware/inputValidationMiddleware");
 const NotificationService = require("../services/notificationService");
-const cacheService = require("../services/cacheService");
 const { invalidateCache } = require("../middleware/cacheMiddleware");
 // Create a Group
 router.post("/create", authenticateUser, async (req, res) => {
@@ -38,9 +37,10 @@ router.post("/create", authenticateUser, async (req, res) => {
     });
     await newGroup.addMember(userId, "admin");
 
-    // Invalidate user's group cache
+    // Invalidate user's group caches across the generic and query cache namespaces.
     await invalidateCache(`user:${userId}:*`);
-    await invalidateCache('query:groups:*');
+    await invalidateCache(`query:user:${userId}:groups`);
+    await invalidateCache("query:groups:*");
 
     // Convert to plain object and ensure _id is a string
     const groupResponse = {
@@ -69,18 +69,6 @@ router.post("/create", authenticateUser, async (req, res) => {
 router.get("/user-groups", authenticateUser, async (req, res) => {
   try {
     const userId = req.user._id;
-    const cacheKey = `user:${userId}:groups`;
-
-    // Try to get from cache first
-    const cachedGroups = await cacheService.getQuery(cacheKey);
-    if (cachedGroups) {
-      return res.status(200).json({ 
-        success: true, 
-        groups: cachedGroups,
-        cached: true 
-      });
-    }
-
     // Find all memberships for the current user
     const memberships = await GroupMember.find({ GroupMember_userId: userId })
       .populate({
@@ -137,9 +125,6 @@ router.get("/user-groups", authenticateUser, async (req, res) => {
           };
         })
     );
-
-    // Cache the results for 10 minutes
-    await cacheService.cacheQuery(cacheKey, groups, cacheService.ttl.MEDIUM);
 
     res.status(200).json({ success: true, groups });
   } catch (error) {

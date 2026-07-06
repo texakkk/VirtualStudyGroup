@@ -31,6 +31,7 @@ import api from "../../api";
 import { getSocketUrl } from "../../config/socketConfig";
 import NotificationSummary from "../../components/notifications/NotificationSummary";
 import { useNotification } from "../../contexts/NotificationContext";
+import { DASHBOARD_DATA_CHANGED_EVENT } from "../../utils/dashboardEvents";
 
 const SummaryCard = ({ title, value, icon: Icon, color = "primary" }) => (
   <Card elevation={3} sx={{ height: "100%" }}>
@@ -51,6 +52,7 @@ const SummaryCard = ({ title, value, icon: Icon, color = "primary" }) => (
 const DashboardSummary = () => {
   const navigate = useNavigate();
   const socketRef = useRef(null);
+  const refreshTimeoutRef = useRef(null);
   const [summary, setSummary] = useState({});
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
@@ -125,6 +127,25 @@ const DashboardSummary = () => {
       fetchSummary(true, timelineFilter);
     });
 
+    const queueSummaryRefresh = () => {
+      if (refreshTimeoutRef.current) {
+        clearTimeout(refreshTimeoutRef.current);
+      }
+
+      refreshTimeoutRef.current = setTimeout(() => {
+        fetchSummary(true, timelineFilter);
+      }, 250);
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        queueSummaryRefresh();
+      }
+    };
+
+    window.addEventListener(DASHBOARD_DATA_CHANGED_EVENT, queueSummaryRefresh);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
     // Auto-refresh every 5 minutes
     const interval = setInterval(() => {
       fetchSummary(true, timelineFilter);
@@ -132,6 +153,11 @@ const DashboardSummary = () => {
 
     return () => {
       clearInterval(interval);
+      if (refreshTimeoutRef.current) {
+        clearTimeout(refreshTimeoutRef.current);
+      }
+      window.removeEventListener(DASHBOARD_DATA_CHANGED_EVENT, queueSummaryRefresh);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
       if (socketRef.current) {
         socketRef.current.disconnect();
       }
