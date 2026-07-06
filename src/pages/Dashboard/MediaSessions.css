@@ -2,10 +2,52 @@
   padding: 20px;
   max-width: 1400px;
   margin: 0 auto;
+  width: 100%;
+  min-width: 0;
 }
 
 @media (max-width: 768px) {
   .media-sessions-container {
-    padding: 10px;
+    padding: 12px;
+    overflow-x: hidden;
+  }
+
+  .media-sessions-container > .MuiPaper-root {
+    padding: 16px !important;
+    margin-bottom: 16px !important;
+    border-radius: 12px;
+  }
+
+  .media-sessions-container > .MuiPaper-root > .MuiBox-root:first-child {
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .media-sessions-container h1 {
+    font-size: 1.65rem;
+    line-height: 1.2;
+  }
+
+  .media-sessions-container .MuiFormControl-root,
+  .media-sessions-container .MuiSelect-select {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .media-sessions-container {
+    padding: 8px;
+  }
+
+  .media-sessions-container > .MuiPaper-root {
+    padding: 14px !important;
+  }
+
+  .media-sessions-container > .MuiPaper-root > .MuiBox-root:first-child {
+    flex-wrap: wrap;
+  }
+
+  .media-sessions-container h1 {
+    font-size: 1.4rem;
   }
 }

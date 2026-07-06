@@ -4,6 +4,7 @@ import './Navbar.css';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [hasScrolled, setHasScrolled] = useState(false);
 
   const toggleMobileMenu = () => {
     const newState = !isMobileMenuOpen;
@@ -24,13 +25,26 @@ const Navbar = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setHasScrolled(window.scrollY > 24);
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
     document.body.style.overflow = 'auto';
   };
 
   return (
-    <nav className="navbar" role="navigation" aria-label="Main navigation" id="navigation">
+    <nav className={`navbar ${hasScrolled || isMobileMenuOpen ? 'scrolled' : ''}`} role="navigation" aria-label="Main navigation" id="navigation">
       <div className="navbar-container">
         {/* Logo Section */}
         <div className="navbar-logo">

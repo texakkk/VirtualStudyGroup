@@ -307,14 +307,15 @@ router.post('/forgot-password',
 
     await user.save();
 
-    const resetUrl = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
+    const clientUrl = process.env.CLIENT_URL || process.env.FRONTEND_URL || 'http://localhost:3000';
+    const resetUrl = `${clientUrl.replace(/\/$/, '')}/reset-password/${resetToken}`;
     const message = `<h1>Password Reset Request</h1>
                      <p>Click the following link to reset your password:</p>
                      <a href="${resetUrl}" clicktracking=off>${resetUrl}</a>`;
 
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
-      to: user.email,
+      to: user.User_email,
       subject: 'Password Reset Request',
       html: message,
     });
