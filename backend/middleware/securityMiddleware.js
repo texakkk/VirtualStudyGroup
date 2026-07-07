@@ -16,14 +16,16 @@ function configureHelmet() {
     contentSecurityPolicy: {
       directives: {
         defaultSrc: ["'self'"],
-        styleSrc: ["'self'", "'unsafe-inline'"],
-        scriptSrc: ["'self'"],
-        imgSrc: ["'self'", 'data:', 'https:'],
-        connectSrc: ["'self'"],
-        fontSrc: ["'self'"],
+        baseUri: ["'self'"],
+        styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+        scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "blob:", "https://www.youtube.com", "https://s.ytimg.com"],
+        imgSrc: ["'self'", 'data:', 'blob:', 'https:', 'http://localhost:5001'],
+        connectSrc: ["'self'", "http://localhost:5001", "ws://localhost:5001", "ws://localhost:3000", "http://localhost:3000", "https://virtualstudygroup.onrender.com", "wss://virtualstudygroup.onrender.com", "https://www.youtube.com", "https://s.ytimg.com"],
+        fontSrc: ["'self'", "https://fonts.gstatic.com", "data:"],
         objectSrc: ["'none'"],
-        mediaSrc: ["'self'"],
-        frameSrc: ["'none'"],
+        mediaSrc: ["'self'", 'blob:', 'http://localhost:5001'],
+        workerSrc: ["'self'", 'blob:'],
+        frameSrc: ["'self'", 'https://www.youtube.com', 'https://www.youtube-nocookie.com'],
       },
     },
     crossOriginEmbedderPolicy: false, // Allow embedding for video/media
