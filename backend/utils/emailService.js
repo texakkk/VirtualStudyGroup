@@ -11,17 +11,23 @@ const createTransporter = () => {
     emailUser,
     emailPass,
     transporter: nodemailer.createTransport({
-      service: process.env.EMAIL_SERVICE || 'Gmail',
-      host: process.env.EMAIL_HOST,
-      port: process.env.EMAIL_PORT ? Number(process.env.EMAIL_PORT) : 587,
-      secure: process.env.EMAIL_SECURE === 'true',
+      host: process.env.EMAIL_HOST || 'smtp.gmail.com',
+      port: Number(process.env.EMAIL_PORT || 587),
+      secure: process.env.EMAIL_SECURE === 'true' || false,
+      requireTLS: true,
       auth: {
         user: emailUser,
         pass: emailPass,
       },
-      connectionTimeout: 10000,
-      greetingTimeout: 10000,
-      socketTimeout: 10000,
+      connectionTimeout: 20000,
+      greetingTimeout: 20000,
+      socketTimeout: 20000,
+      pool: true,
+      maxConnections: 1,
+      maxMessages: 3,
+      tls: {
+        rejectUnauthorized: false,
+      },
     }),
   };
 };
