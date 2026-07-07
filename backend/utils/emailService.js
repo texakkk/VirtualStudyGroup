@@ -1,57 +1,82 @@
-const nodemailer = require('nodemailer');
+const axios = require('axios');
 
 const normalizeEmailValue = (value) => (typeof value === 'string' ? value.trim() : '');
-const normalizePassword = (value) => (typeof value === 'string' ? value.replace(/\s+/g, '') : '');
+const normalizeApiKeyValue = (value) => (typeof value === 'string' ? value.trim() : '');
 
-const createTransporter = () => {
-  const emailUser = normalizeEmailValue(process.env.EMAIL_USER);
-  const emailPass = normalizePassword(process.env.EMAIL_PASS);
+const resendApiKey = normalizeApiKeyValue(process.env.RESEND_API_KEY);
+const defaultSender = normalizeEmailValue(process.env.EMAIL_FROM || process.env.RESEND_FROM || `no-reply@${(process.env.CLIENT_URL || 'virtualstudygroup.app').replace(/^https?:\/\//, '')}`);
+
+const createResendHeaders = () => {
+  if (!resendApiKey) {
+    throw new Error('Resend API key is not configured. Set RESEND_API_KEY in your environment.');
+  }
 
   return {
-    emailUser,
-    emailPass,
-    transporter: nodemailer.createTransport({
-      host: process.env.EMAIL_HOST || 'smtp.gmail.com',
-      port: Number(process.env.EMAIL_PORT || 587),
-      secure: process.env.EMAIL_SECURE === 'true' || false,
-      requireTLS: true,
-      auth: {
-        user: emailUser,
-        pass: emailPass,
-      },
-      connectionTimeout: 20000,
-      greetingTimeout: 20000,
-      socketTimeout: 20000,
-      pool: true,
-      maxConnections: 1,
-      maxMessages: 3,
-      tls: {
-        rejectUnauthorized: false,
-      },
-    }),
+    Authorization: `Bearer ${resendApiKey}`,
+    'Content-Type': 'application/json',
   };
 };
 
-async function sendPasswordResetEmail({ to, resetUrl }) {
-  const { emailUser, emailPass, transporter } = createTransporter();
-
-  if (!emailUser || !emailPass) {
-    throw new Error('Email delivery is not configured.');
+const sendResendEmail = async ({ to, subject, html, text }) => {
+  if (!to) {
+    throw new Error('Recipient email is required.');
   }
 
-  return transporter.sendMail({
-    from: process.env.EMAIL_FROM || emailUser,
+  if (!defaultSender) {
+    throw new Error('Email sender is not configured. Set EMAIL_FROM or RESEND_FROM.');
+  }
+
+  const payload = {
+    from: defaultSender,
+    to,
+    subject,
+    html,
+    text,
+  };
+
+  try {
+    const response = await axios.post(
+      'https://api.resend.com/emails',
+      payload,
+      {
+        headers: createResendHeaders(),
+        timeout: 20000,
+      }
+    );
+
+    if (response.status < 200 || response.status >= 300) {
+      throw new Error(`Resend returned unexpected status ${response.status}`);
+    }
+
+    return response.data;
+  } catch (error) {
+    const responseData = error.response?.data;
+    const responseMessage = responseData
+      ? typeof responseData === 'string'
+        ? responseData
+        : JSON.stringify(responseData)
+      : error.message;
+    throw new Error(`Resend email failed: ${responseMessage}`);
+  }
+};
+
+async function sendPasswordResetEmail({ to, resetUrl }) {
+  const html = `
+    <h1>Password Reset Request</h1>
+    <p>Click the following link to reset your password:</p>
+    <a href="${resetUrl}" clicktracking="off">${resetUrl}</a>
+  `;
+
+  const text = `Password Reset Request\n\nClick the following link to reset your password:\n${resetUrl}`;
+
+  return sendResendEmail({
     to,
     subject: 'Password Reset Request',
-    html: `
-      <h1>Password Reset Request</h1>
-      <p>Click the following link to reset your password:</p>
-      <a href="${resetUrl}" clicktracking="off">${resetUrl}</a>
-    `,
+    html,
+    text,
   });
 }
 
 module.exports = {
-  createTransporter,
   sendPasswordResetEmail,
 };
