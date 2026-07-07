@@ -1,13 +1,19 @@
 const nodemailer = require('nodemailer');
 
+const normalizeEmailValue = (value) => (typeof value === 'string' ? value.trim() : '');
+const normalizePassword = (value) => (typeof value === 'string' ? value.replace(/\s+/g, '') : '');
+
+const emailUser = normalizeEmailValue(process.env.EMAIL_USER);
+const emailPass = normalizePassword(process.env.EMAIL_PASS);
+
 const transporter = nodemailer.createTransport({
   service: process.env.EMAIL_SERVICE || 'Gmail',
   host: process.env.EMAIL_HOST,
   port: process.env.EMAIL_PORT ? Number(process.env.EMAIL_PORT) : 587,
   secure: process.env.EMAIL_SECURE === 'true',
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
+    user: emailUser,
+    pass: emailPass,
   },
   connectionTimeout: 10000,
   greetingTimeout: 10000,
@@ -15,12 +21,12 @@ const transporter = nodemailer.createTransport({
 });
 
 async function sendPasswordResetEmail({ to, resetUrl }) {
-  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+  if (!emailUser || !emailPass) {
     throw new Error('Email delivery is not configured.');
   }
 
   return transporter.sendMail({
-    from: process.env.EMAIL_FROM || process.env.EMAIL_USER,
+    from: process.env.EMAIL_FROM || emailUser,
     to,
     subject: 'Password Reset Request',
     html: `

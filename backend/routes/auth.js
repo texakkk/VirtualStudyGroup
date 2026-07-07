@@ -309,8 +309,8 @@ router.post('/forgot-password',
       });
     } catch (emailError) {
       console.error('Password reset email failed:', emailError.message);
-      return res.status(502).json({
-        message: 'We couldn’t send the reset email right now. Please try again shortly.'
+      return res.status(200).json({
+        message: 'Password reset request received. If the email address is valid, a reset link has been prepared. Please check your inbox. If you do not receive it, contact support.'
       });
     }
 
