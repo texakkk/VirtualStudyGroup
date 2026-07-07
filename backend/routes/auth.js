@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
-const nodemailer = require('nodemailer');
 const path = require('path');
 const User = require('../models/User');
+const { sendPasswordResetEmail } = require('../utils/emailService');
 const Group = require('../models/Group');
 const GroupMember = require('../models/GroupMember');
 const router = express.Router();
@@ -44,14 +44,6 @@ const fileFilter = (req, file, cb) => {
 };
   
 const upload = multer({ storage: storage, fileFilter: fileFilter, limits: { fileSize: 1024 * 1024 * 5 } });
-// Nodemailer configuration for sending emails
-const transporter = nodemailer.createTransport({
-  service: 'Gmail',
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
 const fs = require('fs');
 const uploadsDir = path.join(__dirname, '../uploads/');
 if (!fs.existsSync(uploadsDir)) {
@@ -309,16 +301,18 @@ router.post('/forgot-password',
 
     const clientUrl = process.env.CLIENT_URL || process.env.FRONTEND_URL || 'http://localhost:3000';
     const resetUrl = `${clientUrl.replace(/\/$/, '')}/reset-password/${resetToken}`;
-    const message = `<h1>Password Reset Request</h1>
-                     <p>Click the following link to reset your password:</p>
-                     <a href="${resetUrl}" clicktracking=off>${resetUrl}</a>`;
 
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: user.User_email,
-      subject: 'Password Reset Request',
-      html: message,
-    });
+    try {
+      await sendPasswordResetEmail({
+        to: user.User_email,
+        resetUrl,
+      });
+    } catch (emailError) {
+      console.error('Password reset email failed:', emailError.message);
+      return res.status(502).json({
+        message: 'We couldn’t send the reset email right now. Please try again shortly.'
+      });
+    }
 
     res.status(200).json({ message: 'Email sent. Please check your inbox.' });
   } catch (error) {

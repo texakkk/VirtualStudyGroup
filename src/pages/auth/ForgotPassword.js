@@ -38,7 +38,8 @@ const ForgotPassword = () => {
       setMessage(response.data?.message || 'Reset link sent. Please check your email.');
       setEmail('');
     } catch (err) {
-      setError(err.response?.data?.message || 'Error sending reset link');
+      const backendMessage = err.response?.data?.message;
+      setError(backendMessage || 'Error sending reset link');
     } finally {
       setLoading(false);
     }
